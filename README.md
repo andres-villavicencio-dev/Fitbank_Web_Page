@@ -37,18 +37,4 @@ https://www.fit-bank.com/ # Language selection page https://www.fit-bank.com/en/
 4. **SSL Setup**: Configure HTTPS (required for modern SEO)
 5. **Test Redirects**: Verify language switching works
 
-## Google Search Console Setup
-
-1. Add both language versions:
-   - `https://www.fit-bank.com/en/`
-   - `https://www.fit-bank.com/es/`
-
-2. Submit sitemaps:
-   - Main sitemap: `/sitemap.xml`
-   - English: `/en/sitemap.xml`
-   - Spanish: `/es/sitemap.xml`
-
-3. Set international targeting:
-   - English version: Target "English" speakers
-   - Spanish version: Target "Spanish" speakers and Latin America
 
