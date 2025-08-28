@@ -1,319 +1,363 @@
-// Modern FIT-BANK JavaScript with AI Integration
-document.addEventListener('DOMContentLoaded', () => {
-    // Navigation Toggle
-    const toggle = document.querySelector('.nav-toggle');
-    const nav = document.querySelector('.site-nav');
+// DOM Content Loaded Event
+document.addEventListener('DOMContentLoaded', function() {
+    initializeNavigation();
+    initializeScrollEffects();
+    initializeAIAssistant();
+    initializeContactForm();
+    initializeLazyLoading();
+});
+
+// Navigation Functions
+function initializeNavigation() {
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
     
-    if (toggle && nav) {
-        toggle.addEventListener('click', () => {
-            const open = nav.getAttribute('data-open') === 'true';
-            nav.setAttribute('data-open', String(!open));
-            toggle.setAttribute('aria-expanded', String(!open));
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
         });
-    }
-
-    // Smooth scrolling for anchor links
-    const anchorLinks = document.querySelectorAll('a[href^="#"]');
-    anchorLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-            
-            if (targetElement) {
-                const headerHeight = document.querySelector('.site-header')?.offsetHeight || 80;
-                const targetPosition = targetElement.offsetTop - headerHeight - 20;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-
-    // AI Integration Components
-    const analyzeButton = document.getElementById('analyzeButton');
-    const useCaseNotes = document.getElementById('useCaseNotes');
-    const resultDiv = document.getElementById('geminiAnalysisResult');
-    const demoForm = document.getElementById('demoForm');
-    const modal = document.getElementById('responseModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalBody = document.getElementById('modalBody');
-    const closeModalButton = document.getElementById('closeModalButton');
-    const copyButton = document.getElementById('copyButton');
-
-    // Language Detection
-    const isSpanish = window.location.pathname.includes('/es/');
-    
-    // Secure AI API Call (Backend Proxy Required)
-    const callAI = async (prompt, maxRetries = 3) => {
-        // This should point to your secure backend endpoint
-        const apiEndpoint = '/api/ai-analysis';
         
-        for (let i = 0; i < maxRetries; i++) {
-            try {
-                const response = await fetch(apiEndpoint, {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({ 
-                        prompt: prompt,
-                        language: isSpanish ? 'es' : 'en'
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Server error: ${response.status}`);
-                }
-
-                const result = await response.json();
-                return result.analysis || result.text || 'Analysis completed successfully.';
-
-            } catch (error) {
-                console.error(`Attempt ${i + 1} failed:`, error);
-                if (i === maxRetries - 1) {
-                    return isSpanish 
-                        ? `Error al conectar con el servidor de IA: ${error.message}. Por favor, contacte al soporte técnico.`
-                        : `Error connecting to AI server: ${error.message}. Please contact technical support.`;
-                }
-                await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
-            }
-        }
-    };
-
-    // Use Case Analysis Feature
-    if (analyzeButton && useCaseNotes && resultDiv) {
-        analyzeButton.addEventListener('click', async () => {
-            const notes = useCaseNotes.value.trim();
-            
-            if (notes.length < 10) {
-                resultDiv.style.display = 'block';
-                resultDiv.innerHTML = isSpanish 
-                    ? 'Por favor, describe tu caso de uso con más detalle (mínimo 10 caracteres).'
-                    : 'Please describe your use case in more detail (minimum 10 characters).';
-                return;
-            }
-
-            resultDiv.style.display = 'block';
-            resultDiv.innerHTML = '<div class="spinner"></div>';
-            analyzeButton.disabled = true;
-            analyzeButton.textContent = isSpanish ? 'Analizando...' : 'Analyzing...';
-
-            const moduleList = isSpanish 
-                ? "Canales e integración, Activos (Crédito), Contingentes, Pasivos (Ahorros), Canales electrónicos, Servicios y administración"
-                : "Channels and integration, Assets (Credit), Contingent, Liabilities (Savings), Electronic channels, Services and administration";
-                
-            const prompt = isSpanish
-                ? `Basado en el siguiente caso de uso para una plataforma bancaria, sugiere los 3 módulos más relevantes de FIT-BANK de esta lista: ${moduleList}. Explica brevemente por qué cada uno es importante para este caso específico. Responde en español de manera profesional y concisa. Caso de uso: "${notes}"`
-                : `Based on the following use case for a banking platform, suggest the 3 most relevant FIT-BANK modules from this list: ${moduleList}. Briefly explain why each one is important for this specific case. Respond in English professionally and concisely. Use case: "${notes}"`;
-            
-            const analysis = await callAI(prompt);
-            resultDiv.innerHTML = analysis.replace(/\n/g, '<br>');
-            
-            analyzeButton.disabled = false;
-            analyzeButton.textContent = isSpanish ? '✨ Analizar mi caso de uso con IA' : '✨ Analyze my use case with AI';
+        // Close mobile menu when clicking on nav links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
         });
-    }
-
-    // Enhanced Form Submission with AI
-    if (demoForm) {
-        demoForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const formData = new FormData(demoForm);
-            const name = formData.get('name');
-            const company = formData.get('company');
-            const email = formData.get('email');
-            const country = formData.get('country');
-            const notes = formData.get('notes');
-
-            // Basic validation
-            if (!name || !company || !email) {
-                alert(isSpanish 
-                    ? 'Por favor, complete todos los campos obligatorios.'
-                    : 'Please fill in all required fields.');
-                return;
-            }
-
-            const modalTitleText = isSpanish 
-                ? "Generando Resumen de Seguimiento ✨" 
-                : "Generating Follow-up Summary ✨";
-                
-            showModal(modalTitleText, '<div class="spinner"></div>');
-            copyButton.style.display = 'none';
-
-            const prompt = isSpanish
-                ? `Eres un asistente de ventas de FIT-BANK. Escribe un borrador de correo electrónico de seguimiento conciso y profesional para el equipo de ventas. El correo debe resumir la solicitud del cliente potencial y sugerir los siguientes pasos específicos. Información del cliente:
-                - Nombre: ${name}
-                - Empresa: ${company}
-                - Email: ${email}
-                - País: ${country || 'No especificado'}
-                - Caso de uso: "${notes || 'No proporcionado'}"
-                
-                El correo debe estar en español, ser interno para el equipo de ventas, e incluir recomendaciones específicas de módulos FIT-BANK basadas en el caso de uso.`
-                : `You are a FIT-BANK sales assistant. Write a concise and professional follow-up email draft for the sales team. The email should summarize the prospect's request and suggest specific next steps. Client information:
-                - Name: ${name}
-                - Company: ${company}
-                - Email: ${email}
-                - Country: ${country || 'Not specified'}
-                - Use case: "${notes || 'Not provided'}"
-                
-                The email should be in English, internal for the sales team, and include specific FIT-BANK module recommendations based on the use case.`;
-
-            const emailDraft = await callAI(prompt);
-            
-            const successTitle = isSpanish 
-                ? "Borrador de Correo de Seguimiento ✨" 
-                : "Follow-up Email Draft ✨";
-                
-            showModal(successTitle, `<pre>${emailDraft}</pre>`);
-            copyButton.style.display = 'inline-block';
-            copyButton.textContent = isSpanish ? 'Copiar al portapapeles' : 'Copy to clipboard';
-            
-            // Reset form after successful submission
-            demoForm.reset();
-        });
-    }
-
-    // Modal Functions
-    const showModal = (title, body) => {
-        if (modal && modalTitle && modalBody) {
-            modalTitle.textContent = title;
-            modalBody.innerHTML = body;
-            modal.classList.add('is-visible');
-        }
-    };
-
-    const hideModal = () => {
-        if (modal) {
-            modal.classList.remove('is-visible');
-        }
-    };
-
-    // Modal Event Listeners
-    if (closeModalButton) {
-        closeModalButton.addEventListener('click', hideModal);
-    }
-
-    if (modal) {
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                hideModal();
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!hamburger.contains(event.target) && !navMenu.contains(event.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
             }
         });
     }
+}
 
-    if (copyButton) {
-        copyButton.addEventListener('click', () => {
-            const textToCopy = modalBody.querySelector('pre')?.innerText || modalBody.innerText;
-            
-            // Enhanced clipboard functionality
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(textToCopy).then(() => {
-                    copyButton.textContent = isSpanish ? '¡Copiado!' : 'Copied!';
-                    setTimeout(() => {
-                        copyButton.textContent = isSpanish ? 'Copiar al portapapeles' : 'Copy to clipboard';
-                    }, 2000);
-                });
-            } else {
-                // Fallback for older browsers
-                const textArea = document.createElement("textarea");
-                textArea.value = textToCopy;
-                document.body.appendChild(textArea);
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    copyButton.textContent = isSpanish ? '¡Copiado!' : 'Copied!';
-                    setTimeout(() => {
-                        copyButton.textContent = isSpanish ? 'Copiar al portapapeles' : 'Copy to clipboard';
-                    }, 2000);
-                } catch (err) {
-                    console.error('Fallback: Unable to copy', err);
-                }
-                document.body.removeChild(textArea);
-            }
+// Smooth Scrolling Function
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        const headerHeight = document.querySelector('header').offsetHeight;
+        const targetPosition = section.offsetTop - headerHeight;
+        
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
         });
     }
+}
 
+// Scroll Effects
+function initializeScrollEffects() {
     // Header scroll effect
-    let lastScrollY = 0;
-    const header = document.querySelector('.site-header');
+    const header = document.querySelector('header');
+    let lastScrollY = window.scrollY;
     
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', function() {
         const currentScrollY = window.scrollY;
         
         if (header) {
             if (currentScrollY > 100) {
-                header.style.background = 'rgba(11, 16, 32, 0.95)';
+                header.style.background = 'rgba(15, 20, 25, 0.98)';
+                header.style.backdropFilter = 'blur(20px)';
             } else {
-                header.style.background = 'rgba(11, 16, 32, 0.75)';
+                header.style.background = 'rgba(15, 20, 25, 0.95)';
+                header.style.backdropFilter = 'blur(15px)';
             }
         }
         
         lastScrollY = currentScrollY;
     });
-
+    
     // Intersection Observer for animations
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
-
-    const observer = new IntersectionObserver((entries) => {
+    
+    const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in-up');
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
             }
         });
     }, observerOptions);
-
-    // Observe cards for animation
-    document.querySelectorAll('.card').forEach(card => {
-        observer.observe(card);
+    
+    // Observe elements for scroll animations
+    document.querySelectorAll('.feature-card, .client-logo, .growth-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
     });
+}
 
-    // Analytics tracking for AI features
-    const trackAIUsage = (action, details = {}) => {
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'ai_interaction', {
-                'action': action,
-                'language': isSpanish ? 'es' : 'en',
-                ...details
-            });
-        }
-    };
+// AI Assistant Functions
+function initializeAIAssistant() {
+    const chatMessages = document.getElementById('chatMessages');
+    const userInput = document.getElementById('userInput');
+    
+    // Initialize with welcome message if not already present
+    if (chatMessages && chatMessages.children.length <= 1) {
+        addWelcomeMessage();
+    }
+}
 
-    // Track AI feature usage
-    if (analyzeButton) {
-        analyzeButton.addEventListener('click', () => {
-            trackAIUsage('use_case_analysis', {
-                'has_content': useCaseNotes.value.length > 0
+function addWelcomeMessage() {
+    const chatMessages = document.getElementById('chatMessages');
+    if (!chatMessages) return;
+    
+    // Check if welcome message already exists
+    const existingMessages = chatMessages.querySelectorAll('.ai-message');
+    if (existingMessages.length > 0) return;
+    
+    const welcomeMessage = createMessageElement('ai', 'Hello! I\'m the FIT-BANK AI Assistant. Ask me about our core banking solutions, client success stories, or implementation process.');
+    chatMessages.appendChild(welcomeMessage);
+}
+
+function createMessageElement(type, content) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = type === 'ai' ? 'ai-message' : 'user-message';
+    
+    const avatar = document.createElement('div');
+    avatar.className = 'message-avatar';
+    avatar.textContent = type === 'ai' ? '🤖' : '👤';
+    
+    const messageContent = document.createElement('div');
+    messageContent.className = 'message-content';
+    messageContent.textContent = content;
+    
+    messageDiv.appendChild(avatar);
+    messageDiv.appendChild(messageContent);
+    
+    return messageDiv;
+}
+
+function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        sendMessage();
+    }
+}
+
+function sendMessage() {
+    const userInput = document.getElementById('userInput');
+    const chatMessages = document.getElementById('chatMessages');
+    
+    if (!userInput || !chatMessages) return;
+    
+    const message = userInput.value.trim();
+    if (!message) return;
+    
+    // Add user message
+    const userMessage = createMessageElement('user', message);
+    chatMessages.appendChild(userMessage);
+    
+    // Clear input
+    userInput.value = '';
+    
+    // Show typing indicator
+    const typingMessage = createMessageElement('ai', 'Typing...');
+    chatMessages.appendChild(typingMessage);
+    
+    // Scroll to bottom
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    
+    // Simulate AI response
+    setTimeout(() => {
+        chatMessages.removeChild(typingMessage);
+        
+        const aiResponse = generateAIResponse(message);
+        const aiMessage = createMessageElement('ai', aiResponse);
+        chatMessages.appendChild(aiMessage);
+        
+        // Scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, 1500);
+}
+
+function generateAIResponse(userMessage) {
+    const message = userMessage.toLowerCase();
+    
+    // Client success stories
+    if (message.includes('client') || message.includes('success') || message.includes('growth')) {
+        return "Our clients have achieved remarkable success! For example, Cooperativa Gualaquiza grew their assets by 454% from $22M to $122M since implementing FIT-BANK in 2017. Cooperativa Atuntaqui also saw 211% growth, from $173M to $538M. We serve 35+ financial institutions across Ecuador, Central America, Caribbean, Peru, and UK.";
+    }
+    
+    // Implementation questions
+    if (message.includes('implement') || message.includes('timeline') || message.includes('time')) {
+        return "FIT-BANK implementation typically takes 3-6 months depending on your institution's size and requirements. We provide full support including data migration, staff training, and system integration. Our team works closely with you throughout the entire process to ensure a smooth transition.";
+    }
+    
+    // Security questions
+    if (message.includes('security') || message.includes('safe') || message.includes('protect')) {
+        return "FIT-BANK uses bank-grade security protocols including end-to-end encryption, multi-factor authentication, real-time fraud detection, and full regulatory compliance for Latin American financial markets. We meet all international banking security standards and undergo regular security audits.";
+    }
+    
+    // Features and differences
+    if (message.includes('different') || message.includes('features') || message.includes('special')) {
+        return "FIT-BANK stands out with our AI-powered analytics, real-time processing, comprehensive mobile platform, and proven track record in Latin America. We offer complete core banking, digital banking, business intelligence, and multi-channel integration. Our system is designed specifically for the Latin American financial market.";
+    }
+    
+    // Pricing questions
+    if (message.includes('price') || message.includes('cost') || message.includes('pricing')) {
+        return "FIT-BANK pricing is customized based on your institution's size, requirements, and modules needed. We offer flexible licensing options and competitive pricing. Please contact our sales team for a detailed quote tailored to your specific needs.";
+    }
+    
+    // Support questions
+    if (message.includes('support') || message.includes('help') || message.includes('service')) {
+        return "We provide 24/7 technical support, comprehensive training programs, regular system updates, and dedicated account management. Our support team includes banking experts and technical specialists who understand the financial industry's unique requirements.";
+    }
+    
+    // Default response
+    return "Thank you for your question! FIT-BANK offers comprehensive core banking solutions for financial institutions across Latin America. Our system includes core banking, digital platforms, AI analytics, and security features. Would you like to know more about our client success stories, implementation process, or specific features?";
+}
+
+function askPredefined(question) {
+    const userInput = document.getElementById('userInput');
+    if (userInput) {
+        userInput.value = question;
+        sendMessage();
+    }
+}
+
+// Contact Form Functions
+function initializeContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', handleContactSubmit);
+    }
+}
+
+function submitForm(event) {
+    handleContactSubmit(event);
+}
+
+function handleContactSubmit(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const formData = new FormData(form);
+    
+    // Get form values
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const institution = formData.get('institution');
+    const interest = formData.get('interest');
+    const message = formData.get('message');
+    
+    // Basic validation
+    if (!name || !email || !institution || !interest) {
+        showNotification('Please fill in all required fields.', 'error');
+        return;
+    }
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        showNotification('Please enter a valid email address.', 'error');
+        return;
+    }
+    
+    // Show loading state
+    const submitButton = form.querySelector('button[type="submit"]');
+    const originalText = submitButton.textContent;
+    submitButton.textContent = 'Sending...';
+    submitButton.disabled = true;
+    
+    // Simulate form submission
+    setTimeout(() => {
+        // Reset button
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
+        
+        // Show success message
+        showNotification('Thank you for your interest! We will contact you soon.', 'success');
+        
+        // Reset form
+        form.reset();
+        
+        // Optional: Send to actual backend
+        // sendToBackend(formData);
+    }, 2000);
+}
+
+function showNotification(message, type) {
+    // Remove existing notifications
+    const existingNotification = document.querySelector('.notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+    
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#00d4aa' : '#ff6b35'};
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+        transform: translateX(400px);
+        transition: transform 0.3s ease;
+    `;
+    notification.textContent = message;
+    
+    // Add to page
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Remove after delay
+    setTimeout(() => {
+        notification.style.transform = 'translateX(400px)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 4000);
+}
+
+// Lazy Loading for Images
+function initializeLazyLoading() {
+    const images = document.querySelectorAll('img[data-src]');
+    
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    imageObserver.unobserve(img);
+                }
             });
         });
-    }
-
-    // Keyboard shortcuts
-    document.addEventListener('keydown', (e) => {
-        // Escape key closes modal
-        if (e.key === 'Escape' && modal?.classList.contains('is-visible')) {
-            hideModal();
-        }
         
-        // Ctrl/Cmd + Enter submits form
-        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter' && document.activeElement?.tagName === 'TEXTAREA') {
-            const form = document.activeElement.closest('form');
-            if (form) {
-                form.dispatchEvent(new Event('submit', { cancelable: true }));
-            }
-        }
-    });
-});
+        images.forEach(img => imageObserver.observe(img));
+    } else {
+        // Fallback for older browsers
+        images.forEach(img => {
+            img.src = img.dataset.src;
+            img.classList.remove('lazy');
+        });
+    }
+}
 
-// Utility functions
-const debounce = (func, wait) => {
+// Utility Functions
+function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
         const later = () => {
@@ -323,193 +367,76 @@ const debounce = (func, wait) => {
         clearTimeout(timeout);
         timeout = setTimeout(later, wait);
     };
-};
-
-// Enhanced resize handler
-const handleResize = debounce(() => {
-    // Close mobile menu on resize to desktop
-    if (window.innerWidth >= 860) {
-        const nav = document.querySelector('.site-nav');
-        const toggle = document.querySelector('.nav-toggle');
-        
-        if (nav && toggle) {
-            nav.setAttribute('data-open', 'false');
-            toggle.setAttribute('aria-expanded', 'false');
-        }
-    }
-}, 250);
-
-window.addEventListener('resize', handleResize);
-
-// Performance monitoring
-if ('requestIdleCallback' in window) {
-    requestIdleCallback(() => {
-        // Initialize non-critical features during idle time
-        console.log('FIT-BANK: Enhanced features loaded');
-    });
 }
 
-// Animate client logos on scroll
-document.addEventListener('DOMContentLoaded', () => {
-    // ... existing code ...
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
 
-    // Client logo animation
-    const clientObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.add('animate');
-                }, index * 100); // Stagger animation
-            }
-        });
-    }, {
-        threshold: 0.2,
-        rootMargin: '0px 0px -50px 0px'
-    });
+// Performance Optimization
+const debouncedScroll = debounce(function() {
+    // Handle scroll events that don't need to run frequently
+}, 100);
 
-    // Observe client logo items
-    document.querySelectorAll('.client-logo-item').forEach(item => {
-        clientObserver.observe(item);
-    });
+window.addEventListener('scroll', debouncedScroll);
 
-    // Lazy load images for better performance
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                    imageObserver.unobserve(img);
-                }
-            }
-        });
-    });
-
-    // Observe images for lazy loading
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
-    });
+// Error Handling
+window.addEventListener('error', function(event) {
+    console.error('JavaScript Error:', event.error);
+    // Optional: Send error to analytics
 });
 
-// Show all clients modal function
-function showAllClients() {
-    const isSpanish = window.location.pathname.includes('/es/');
-    
-    const clientList = [
-        "Cooperativa de Ahorro y Crédito La Dolorosa Ltda",
-        "Cooperativa Mushuc Runa",
-        "Cooperativa JEP", 
-        "Cooperativa Atuntaqui",
-        "Cooperativa Señor de Girón",
-        "Cooperativa Pilahuin Tio",
-        "Cooperativa Padre Julián Lorente",
-        "Cooperativa Visión de los Andes",
-        "Cooperativa Luz del Valle",
-        "Educadores del Azuay",
-        "Cooperativa Gualaquiza",
-        "Cooperativa Financredit",
-        "Cooperativa San Jorge",
-        "Club Social de Aerotécnicos FAE",
-        "Educadores de Loja",
-        "Cooperativa Sierra Centro Ltda"
+// Browser Compatibility Checks
+function checkBrowserSupport() {
+    const requiredFeatures = [
+        'querySelector',
+        'addEventListener',
+        'IntersectionObserver'
     ];
     
-    const title = isSpanish ? "Todos Nuestros Clientes" : "All Our Clients";
-    const subtitle = isSpanish ? "Instituciones financieras que confían en FIT-BANK:" : "Financial institutions that trust FIT-BANK:";
+    const unsupportedFeatures = requiredFeatures.filter(feature => {
+        return !(feature in window || feature in document);
+    });
     
-    const clientListHtml = clientList.map(client => `
-        <div style="padding: 8px 12px; background: var(--chip); margin: 4px 0; border-radius: 6px; border-left: 3px solid var(--brand);">
-            ${client}
-        </div>
-    `).join('');
-    
-    const modalContent = `
-        <h3>${title}</h3>
-        <p style="color: var(--muted); margin-bottom: 20px;">${subtitle}</p>
-        <div style="max-height: 400px; overflow-y: auto;">
-            ${clientListHtml}
-        </div>
-        <p style="color: var(--muted); margin-top: 20px; font-size: 0.9rem;">
-            ${isSpanish ? 'Y muchas más instituciones en crecimiento...' : 'And many more growing institutions...'}
-        </p>
-    `;
-    
-    if (typeof showModal === 'function') {
-        showModal(title, modalContent);
+    if (unsupportedFeatures.length > 0) {
+        console.warn('Some features may not work in this browser:', unsupportedFeatures);
     }
 }
 
-// Enhanced error handling for dark theme logos
-function handleLogoError(img, fallbackText) {
-    img.style.display = 'none';
-    const container = img.parentElement;
-    container.classList.add('text-only');
-    container.innerHTML = `<div class="client-logo-text">${fallbackText}</div>`;
-}
+checkBrowserSupport();
 
-// Improved logo loading for dark theme
-document.addEventListener('DOMContentLoaded', () => {
-    // Enhanced image loading with dark theme filters
-    const images = document.querySelectorAll('.client-logo-item img, .testimonial-logo img');
-    
-    images.forEach(img => {
-        img.addEventListener('load', function() {
-            this.classList.add('loaded');
-        });
-        
-        img.addEventListener('error', function() {
-            const fallbackText = this.alt || 'Client Logo';
-            handleLogoError(this, fallbackText);
-        });
-    });
-    
-    // Staggered animation for client logos
-    const clientItems = document.querySelectorAll('.client-logo-item');
-    const clientObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.add('animate');
-                }, index * 150); // Stagger the animations
-            }
-        });
-    }, {
-        threshold: 0.3,
-        rootMargin: '0px 0px -100px 0px'
-    });
-
-    clientItems.forEach(item => {
-        clientObserver.observe(item);
-    });
-});
-
-// Enhanced analytics for client interactions
-function trackClientInteraction(clientName, action) {
+// Analytics and Tracking (placeholder)
+function trackEvent(eventName, eventData) {
+    // Placeholder for analytics tracking
     if (typeof gtag !== 'undefined') {
-        gtag('event', 'client_interaction', {
-            'client_name': clientName,
-            'action': action,
-            'page_language': window.location.pathname.includes('/es/') ? 'es' : 'en'
-        });
+        gtag('event', eventName, eventData);
     }
+    
+    console.log('Event tracked:', eventName, eventData);
 }
 
-// Add click tracking to client logos
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.client-logo-item').forEach(item => {
-        item.addEventListener('click', () => {
-            const clientName = item.querySelector('img')?.alt || 
-                             item.querySelector('.client-logo-text')?.textContent?.replace(/\n/g, ' ') || 
-                             'Unknown Client';
-            trackClientInteraction(clientName.trim(), 'click');
+// Track button clicks
+document.addEventListener('click', function(event) {
+    if (event.target.matches('.btn-primary, .btn-secondary')) {
+        trackEvent('button_click', {
+            button_text: event.target.textContent,
+            button_class: event.target.className
         });
-        
-        item.addEventListener('mouseenter', () => {
-            const clientName = item.querySelector('img')?.alt || 
-                             item.querySelector('.client-logo-text')?.textContent?.replace(/\n/g, ' ') || 
-                             'Unknown Client';
-            trackClientInteraction(clientName.trim(), 'hover');
-        });
-    });
+    }
 });
+
+// Export functions for global use
+window.scrollToSection = scrollToSection;
+window.sendMessage = sendMessage;
+window.handleKeyPress = handleKeyPress;
+window.askPredefined = askPredefined;
+window.submitForm = submitForm;
