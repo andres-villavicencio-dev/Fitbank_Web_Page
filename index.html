@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIT-BANK | Choose Your Language - Elige tu idioma</title>
+    <meta name="description" content="FIT-BANK - Select your preferred language to continue. Selecciona tu idioma preferido para continuar.">
+    
+    <!-- Hreflang tags -->
+    <link rel="alternate" hreflang="en" href="https://www.fit-bank.com/en/">
+    <link rel="alternate" hreflang="es" href="https://www.fit-bank.com/es/">
+    <link rel="alternate" hreflang="x-default" href="https://www.fit-bank.com/">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.fit-bank.com/">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Language Selection Specific Styles */
+        .language-selection {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Animated background */
+        .language-selection::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMGExNjQwIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMTAxYTRmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgZmlsbD0idXJsKCNnKSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPjxnIHN0cm9rZT0iIzVhYTJmZiIgc3Ryb2tlLW9wYWNpdHk9IjAuMjUiPjxwYXRoIGQ9Ik0wLDc4MCBDMzAwLDcyMCA2MDAsODYwIDkwMCw4MjAgMTIwMCw3ODAgMTQwMCw4NjAgMTYwMCw4MjAiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMCw2NDAgQzM1MCw2MDAgNjUwLDcyMCA5NTAsNjgwIDEyNTAsNjQwIDE0NTAsNzIwIDE2MDAsNjgwIiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTAsNTAwIEMzNTAsNDYwIDY1MCw1ODAgOTUwLDU0MCAxMjUwLDUwMCAxNDUwLDU4MCAxNjAwLDU0MCIgZmlsbD0ibm9uZSIvPjwvZz48L3N2Zz4=') center/cover;
+            opacity: 0.6;
+            z-index: 0;
+        }
+        
+        .language-container {
+            background: var(--card);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid #1c244d;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .language-logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--brand);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--brand), var(--brand-2));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .language-title {
+            font-size: 1.5rem;
+            color: var(--ink);
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+        
+        .language-options {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .language-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1.2rem 2rem;
+            background: var(--chip);
+            border: 1px solid #24305b;
+            border-radius: var(--border-radius-small);
+            text-decoration: none;
+            color: var(--ink);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .language-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--brand), var(--brand-2));
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+        
+        .language-link:hover::before {
+            left: 0;
+        }
+        
+        .language-link:hover {
+            color: #081022;
+            border-color: var(--brand);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(90, 162, 255, 0.3);
+        }
+        
+        .language-flag {
+            font-size: 1.8rem;
+        }
+        
+        .auto-redirect {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-top: 1.5rem;
+        }
+        
+        .loading {
+            display: none;
+            margin-top: 1rem;
+            color: var(--brand);
+        }
+        
+        .redirect-timer {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(90, 162, 255, 0.1);
+            border: 1px solid var(--brand);
+            border-radius: 8px;
+            color: var(--brand);
+        }
+        
+        .redirect-timer.show {
+            display: block;
+        }
+        
+        .countdown {
+            font-weight: 600;
+            color: var(--brand-2);
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 640px) {
+            .language-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .language-logo {
+                font-size: 2rem;
+            }
+            
+            .language-title {
+                font-size: 1.3rem;
+            }
+            
+            .language-link {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-selection">
+        <div class="language-container">
+            <div class="language-logo">FIT-BANK</div>
+            <h1 class="language-title">Choose Your Language<br><span style="font-weight: 400; color: var(--muted);">Elige tu idioma</span></h1>
+            
+            <div class="language-options">
+                <a href="en/index.html" class="language-link" id="english-link">
+                    <span class="language-flag">🇺🇸</span>
+                    <span>English</span>
+                </a>
+                
+                <a href="es/index.html" class="language-link" id="spanish-link">
+                    <span class="language-flag">🇪🇸</span>
+                    <span>Español</span>
+                </a>
+            </div>
+            
+            <div class="auto-redirect">
+                <p>Redirecting based on your browser language...</p>
+                <p style="font-size: 0.8rem; margin-top: 0.5rem;">Redirigiendo según el idioma de tu navegador...</p>
+                
+                <div class="redirect-timer" id="redirectTimer">
+                    <p>Auto-redirecting in <span class="countdown" id="countdown">3</span> seconds...</p>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">Redirección automática en <span class="countdown">3</span> segundos...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced language detection and redirect
+        function detectAndRedirect() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const langCode = userLang.substring(0, 2).toLowerCase();
+            
+            // Check if this is the first visit or if user came back to language selection
+            const hasVisited = localStorage.getItem('fit-bank-visited');
+            const languagePreference = localStorage.getItem('fit-bank-language');
+            
+            // If user has a language preference, respect it
+            if (languagePreference && !window.location.search.includes('reset')) {
+                if (languagePreference === 'es') {
+                    window.location.href = 'es/index.html';
+                } else {
+                    window.location.href = 'en/index.html';
+                }
+                return;
+            }
+            
+            // Show countdown timer
+            const timer = document.getElementById('redirectTimer');
+            const countdownElements = document.querySelectorAll('.countdown');
+            timer.classList.add('show');
+            
+            let countdown = 3;
+            const countdownInterval = setInterval(() => {
+                countdown--;
+                countdownElements.forEach(el => el.textContent = countdown);
+                
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                    
+                    // Mark as visited and redirect based on browser language
+                    localStorage.setItem('fit-bank-visited', 'true');
+                    
+                    if (langCode === 'es') {
+                        localStorage.setItem('fit-bank-language', 'es');
+                        window.location.href = 'es/index.html';
+                    } else {
+                        localStorage.setItem('fit-bank-language', 'en');
+                        window.location.href = 'en/index.html';
+                    }
+                }
+            }, 1000);
+            
+            // Allow users to cancel auto-redirect by hovering over language options
+            const languageLinks = document.querySelectorAll('.language-link');
+            languageLinks.forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    clearInterval(countdownInterval);
+                    timer.style.opacity = '0.5';
+                });
+            });
+        }
+        
+        // Track manual language selection
+        document.getElementById('english-link').addEventListener('click', function(e) {
+            localStorage.setItem('fit-bank-language', 'en');
+            localStorage.setItem('fit-bank-visited', 'true');
+            
+            // Analytics tracking
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'language_selection', {
+                    'selected_language': 'en',
+                    'method': 'manual'
+                });
+            }
+        });
+        
+        document.getElementById('spanish-link').addEventListener('click', function(e) {
+            localStorage.setItem('fit-bank-language', 'es');
+            localStorage.setItem('fit-bank-visited', 'true');
+            
+            // Analytics tracking
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'language_selection', {
+                    'selected_language': 'es',
+                    'method': 'manual'
+                });
+            }
+        });
+        
+        // Check URL parameters for reset functionality
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('reset') === 'true') {
+            localStorage.removeItem('fit-bank-visited');
+            localStorage.removeItem('fit-bank-language');
+        }
+        
+        // Only auto-redirect if not visited before or if reset parameter is present
+        const hasVisited = localStorage.getItem('fit-bank-visited');
+        if (!hasVisited || urlParams.get('reset') === 'true') {
+            setTimeout(detectAndRedirect, 1500);
+        } else {
+            // If user has visited before, just show the options without countdown
+            document.querySelector('.auto-redirect').style.display = 'none';
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === '1' || e.key === 'e' || e.key === 'E') {
+                document.getElementById('english-link').click();
+            } else if (e.key === '2' || e.key === 's' || e.key === 'S') {
+                document.getElementById('spanish-link').click();
+            }
+        });
+        
+        // Preload language pages for faster navigation
+        setTimeout(() => {
+            const englishLink = document.createElement('link');
+            englishLink.rel = 'prefetch';
+            englishLink.href = 'en/index.html';
+            document.head.appendChild(englishLink);
+            
+            const spanishLink = document.createElement('link');
+            spanishLink.rel = 'prefetch';
+            spanishLink.href = 'es/index.html';
+            document.head.appendChild(spanishLink);
+        }, 2000);
+    </script>
+</body>
+</html>

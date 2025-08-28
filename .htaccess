@@ -1,0 +1,70 @@
+# Enable RewriteEngine
+RewriteEngine On
+
+# Redirect www to non-www (optional)
+RewriteCond %{HTTP_HOST} ^www\.fit-bank\.com [NC]
+RewriteRule ^(.*)$ https://fit-bank.com/$1 [R=301,L]
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://fit-bank.com/$1 [R=301,L]
+
+# Handle language directory access
+# Redirect /en to /en/ (add trailing slash)
+RewriteRule ^en$ /en/ [R=301,L]
+
+# Redirect /es to /es/ (add trailing slash)  
+RewriteRule ^es$ /es/ [R=301,L]
+
+# Ensure language directories work properly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(en|es)/(.*)$ $1/$2 [L]
+
+# Handle missing index.html in language directories
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(en|es)/?$ $1/index.html [L]
+
+# Default fallback for root directory
+DirectoryIndex index.html
+
+# Clean URLs - remove .html extension (but preserve language directories)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !^/(en|es)/
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# Language-specific headers
+<FilesMatch "^(en/)">
+    Header set Content-Language "en"
+</FilesMatch>
+
+<FilesMatch "^(es/)">
+    Header set Content-Language "es"
+</FilesMatch>
+
+# Compression for better performance
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Browser caching
+<IfModule mod_expires.c>
+    ExpiresActive on
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+</IfModule>
+
+# Security headers
+Header always set X-Content-Type-Options nosniff
+Header always set X-Frame-Options DENY
+Header always set X-XSS-Protection "1; mode=block"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+# Custom error pages (optional)
+ErrorDocument 404 /404.html
