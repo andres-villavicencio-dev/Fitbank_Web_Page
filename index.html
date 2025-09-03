@@ -3,332 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FIT-BANK | Choose Your Language - Elige tu idioma</title>
-    <meta name="description" content="FIT-BANK - Select your preferred language to continue. Selecciona tu idioma preferido para continuar.">
-    
-    <!-- Hreflang tags -->
+    <title>FIT-BANK - Choose Your Language | Seleccione su Idioma</title>
+    <meta name="description" content="Welcome to FIT-BANK. Choose your preferred language to access our advanced core banking solutions for Latin America.">
+    <link rel="canonical" href="https://www.fit-bank.com/">
     <link rel="alternate" hreflang="en" href="https://www.fit-bank.com/en/">
     <link rel="alternate" hreflang="es" href="https://www.fit-bank.com/es/">
     <link rel="alternate" hreflang="x-default" href="https://www.fit-bank.com/">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://www.fit-bank.com/">
-    
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
     <style>
-        /* Language Selection Specific Styles */
-        .language-selection {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #0f1419 100%);
+            color: #ffffff;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--bg);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* Animated background */
-        .language-selection::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMGExNjQwIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMTAxYTRmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgZmlsbD0idXJsKCNnKSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPjxnIHN0cm9rZT0iIzVhYTJmZiIgc3Ryb2tlLW9wYWNpdHk9IjAuMjUiPjxwYXRoIGQ9Ik0wLDc4MCBDMzAwLDcyMCA2MDAsODYwIDkwMCw4MjAgMTIwMCw3ODAgMTQwMCw4NjAgMTYwMCw4MjAiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMCw2NDAgQzM1MCw2MDAgNjUwLDcyMCA5NTAsNjgwIDEyNTAsNjQwIDE0NTAsNzIwIDE2MDAsNjgwIiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTAsNTAwIEMzNTAsNDYwIDY1MCw1ODAgOTUwLDU0MCAxMjUwLDUwMCAxNDUwLDU4MCAxNjAwLDU0MCIgZmlsbD0ibm9uZSIvPjwvZz48L3N2Zz4=') center/cover;
-            opacity: 0.6;
-            z-index: 0;
+            overflow-x: hidden;
         }
         
         .language-container {
-            background: var(--card);
-            padding: 3rem;
-            border-radius: var(--border-radius);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             text-align: center;
-            max-width: 500px;
+            padding: 3rem;
+            background: rgba(37, 51, 65, 0.9);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 212, 170, 0.3);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
             width: 90%;
-            border: 1px solid #1c244d;
-            position: relative;
-            z-index: 1;
+            animation: fadeInUp 1s ease-out;
         }
         
-        .language-logo {
+        .logo-container {
+            margin-bottom: 3rem;
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+        
+        .logo {
+            height: 80px;
+            width: auto;
+            max-width: 320px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 15px rgba(0, 212, 170, 0.3));
+        }
+        
+        h1 {
             font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--brand);
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--brand), var(--brand-2));
-            background-clip: text;
+            background: linear-gradient(135deg, #00d4aa, #0066cc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
-        .language-title {
-            font-size: 1.5rem;
-            color: var(--ink);
+        .subtitle {
+            font-size: 1.3rem;
+            color: #a0aec0;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+        
+        .language-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
             margin-bottom: 2rem;
-            line-height: 1.4;
         }
         
-        .language-options {
-            display: grid;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        
-        .language-link {
+        .language-btn {
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 1rem;
-            padding: 1.2rem 2rem;
-            background: var(--chip);
-            border: 1px solid #24305b;
-            border-radius: var(--border-radius-small);
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(135deg, #00d4aa, #0066cc);
+            color: white;
             text-decoration: none;
-            color: var(--ink);
+            border-radius: 12px;
+            font-size: 1.2rem;
             font-weight: 600;
-            font-size: 1.1rem;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            min-width: 200px;
         }
         
-        .language-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--brand), var(--brand-2));
-            transition: left 0.3s ease;
-            z-index: -1;
+        .language-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.4);
+            border-color: #00d4aa;
         }
         
-        .language-link:hover::before {
-            left: 0;
-        }
-        
-        .language-link:hover {
-            color: #081022;
-            border-color: var(--brand);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(90, 162, 255, 0.3);
-        }
-        
-        .language-flag {
+        .flag {
             font-size: 1.8rem;
         }
         
         .auto-redirect {
-            font-size: 0.9rem;
-            color: var(--muted);
-            margin-top: 1.5rem;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(0, 212, 170, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #00d4aa;
         }
         
-        .loading {
-            display: none;
-            margin-top: 1rem;
-            color: var(--brand);
-        }
-        
-        .redirect-timer {
-            display: none;
-            margin-top: 1rem;
-            padding: 1rem;
-            background: rgba(90, 162, 255, 0.1);
-            border: 1px solid var(--brand);
-            border-radius: 8px;
-            color: var(--brand);
-        }
-        
-        .redirect-timer.show {
-            display: block;
+        .auto-redirect h3 {
+            color: #00d4aa;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
         }
         
         .countdown {
-            font-weight: 600;
-            color: var(--brand-2);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0066cc;
+            margin: 0.5rem 0;
         }
         
-        /* Mobile responsiveness */
-        @media (max-width: 640px) {
+        .redirect-links {
+            margin-top: 1rem;
+        }
+        
+        .redirect-links a {
+            color: #00d4aa;
+            text-decoration: none;
+            margin: 0 0.5rem;
+            font-weight: 500;
+        }
+        
+        .redirect-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .company-info {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #718096;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+        
+        @media (max-width: 768px) {
             .language-container {
                 padding: 2rem;
                 margin: 1rem;
             }
             
-            .language-logo {
+            h1 {
                 font-size: 2rem;
             }
             
-            .language-title {
-                font-size: 1.3rem;
+            .subtitle {
+                font-size: 1.1rem;
             }
             
-            .language-link {
-                padding: 1rem 1.5rem;
-                font-size: 1rem;
+            .language-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .language-btn {
+                min-width: 250px;
+            }
+            
+            .logo {
+                height: 60px;
+                max-width: 260px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .language-container {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .language-btn {
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+                min-width: 200px;
+            }
+            
+            .logo {
+                height: 50px;
+                max-width: 200px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="language-selection">
-        <div class="language-container">
-            <div class="language-logo">FIT-BANK</div>
-            <h1 class="language-title">Choose Your Language<br><span style="font-weight: 400; color: var(--muted);">Elige tu idioma</span></h1>
-            
-            <div class="language-options">
-                <a href="en/index.html" class="language-link" id="english-link">
-                    <span class="language-flag">🇺🇸</span>
-                    <span>English</span>
-                </a>
-                
-                <a href="es/index.html" class="language-link" id="spanish-link">
-                    <span class="language-flag">🇪🇸</span>
-                    <span>Español</span>
-                </a>
-            </div>
-            
-            <div class="auto-redirect">
-                <p>Redirecting based on your browser language...</p>
-                <p style="font-size: 0.8rem; margin-top: 0.5rem;">Redirigiendo según el idioma de tu navegador...</p>
-                
-                <div class="redirect-timer" id="redirectTimer">
-                    <p>Auto-redirecting in <span class="countdown" id="countdown">3</span> seconds...</p>
-                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">Redirección automática en <span class="countdown">3</span> segundos...</p>
-                </div>
-            </div>
+    <div class="language-container">
+        <div class="logo-container">
+            <img src="assets/logo_softwarehouse_large.b9e74024f957169272ab58d7596e8e65.svg" alt="SOFT WAREHOUSE SA Logo" class="logo">
+        </div>
+        
+        <h1>Welcome to FIT-BANK</h1>
+        <p class="subtitle">
+            Advanced Core Banking Solutions for Latin America<br>
+            Soluciones Bancarias Avanzadas para América Latina
+        </p>
+        
+        <div class="language-buttons">
+            <a href="en/index.html" class="language-btn" id="englishBtn">
+                <span class="flag">🇺🇸</span>
+                <span>English</span>
+            </a>
+            <a href="es/index.html" class="language-btn" id="spanishBtn">
+                <span class="flag">🇪🇸</span>
+                <span>Español</span>
+            </a>
+        </div>
+        
+        <div class="auto-redirect">
+            <h3>🌐 Auto-Redirect</h3>
+            <p>Redirecting based on your browser language in:</p>
+            <div class="countdown" id="countdown">5</div>
+            <p>
+                Or choose manually: 
+                <span class="redirect-links">
+                    <a href="en/index.html" onclick="clearCountdown()">English</a> | 
+                    <a href="es/index.html" onclick="clearCountdown()">Español</a>
+                </span>
+            </p>
+        </div>
+        
+        <div class="company-info">
+            <p><strong>Soft Warehouse S.A.</strong> - Transforming Financial Institutions Since 2010</p>
+            <p>🏢 Quito, Ecuador | 📧 info@fit-bank.com</p>
         </div>
     </div>
 
     <script>
-        // Enhanced language detection and redirect
-        function detectAndRedirect() {
+        // Language detection and auto-redirect
+        let countdownTimer = 10;
+        let countdownInterval;
+        
+        function updateCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            if (countdownElement) {
+                countdownElement.textContent = countdownTimer;
+            }
+            
+            if (countdownTimer <= 0) {
+                autoRedirect();
+            } else {
+                countdownTimer--;
+            }
+        }
+        
+        function autoRedirect() {
+            clearInterval(countdownInterval);
+            
+            // Get browser language
             const userLang = navigator.language || navigator.userLanguage;
             const langCode = userLang.substring(0, 2).toLowerCase();
             
-            // Check if this is the first visit or if user came back to language selection
-            const hasVisited = localStorage.getItem('fit-bank-visited');
-            const languagePreference = localStorage.getItem('fit-bank-language');
-            
-            // If user has a language preference, respect it
-            if (languagePreference && !window.location.search.includes('reset')) {
-                if (languagePreference === 'es') {
-                    window.location.href = 'es/index.html';
-                } else {
-                    window.location.href = 'en/index.html';
-                }
+            // Check if user has a saved preference
+            const savedLang = localStorage.getItem('fitbank-language');
+            if (savedLang) {
+                window.location.href = savedLang + '/index.html';
                 return;
             }
             
-            // Show countdown timer
-            const timer = document.getElementById('redirectTimer');
-            const countdownElements = document.querySelectorAll('.countdown');
-            timer.classList.add('show');
+            // Redirect based on browser language
+            if (langCode === 'es') {
+                window.location.href = 'es/index.html';
+            } else {
+                window.location.href = 'en/index.html';
+            }
+        }
+        
+        function clearCountdown() {
+            clearInterval(countdownInterval);
+        }
+        
+        // Start countdown
+        document.addEventListener('DOMContentLoaded', function() {
+            countdownInterval = setInterval(updateCountdown, 1000);
             
-            let countdown = 3;
-            const countdownInterval = setInterval(() => {
-                countdown--;
-                countdownElements.forEach(el => el.textContent = countdown);
-                
-                if (countdown <= 0) {
-                    clearInterval(countdownInterval);
-                    
-                    // Mark as visited and redirect based on browser language
-                    localStorage.setItem('fit-bank-visited', 'true');
-                    
-                    if (langCode === 'es') {
-                        localStorage.setItem('fit-bank-language', 'es');
-                        window.location.href = 'es/index.html';
-                    } else {
-                        localStorage.setItem('fit-bank-language', 'en');
-                        window.location.href = 'en/index.html';
-                    }
-                }
-            }, 1000);
-            
-            // Allow users to cancel auto-redirect by hovering over language options
-            const languageLinks = document.querySelectorAll('.language-link');
-            languageLinks.forEach(link => {
-                link.addEventListener('mouseenter', () => {
-                    clearInterval(countdownInterval);
-                    timer.style.opacity = '0.5';
-                });
+            // Add click handlers to save language preference
+            document.getElementById('englishBtn').addEventListener('click', function() {
+                localStorage.setItem('fitbank-language', 'en');
+                clearCountdown();
             });
-        }
-        
-        // Track manual language selection
-        document.getElementById('english-link').addEventListener('click', function(e) {
-            localStorage.setItem('fit-bank-language', 'en');
-            localStorage.setItem('fit-bank-visited', 'true');
             
-            // Analytics tracking
+            document.getElementById('spanishBtn').addEventListener('click', function() {
+                localStorage.setItem('fitbank-language', 'es');
+                clearCountdown();
+            });
+        });
+        
+        // Analytics tracking
+        function trackLanguageSelection(language) {
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'language_selection', {
-                    'selected_language': 'en',
+                    'language': language,
                     'method': 'manual'
                 });
             }
-        });
-        
-        document.getElementById('spanish-link').addEventListener('click', function(e) {
-            localStorage.setItem('fit-bank-language', 'es');
-            localStorage.setItem('fit-bank-visited', 'true');
-            
-            // Analytics tracking
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'language_selection', {
-                    'selected_language': 'es',
-                    'method': 'manual'
-                });
-            }
-        });
-        
-        // Check URL parameters for reset functionality
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('reset') === 'true') {
-            localStorage.removeItem('fit-bank-visited');
-            localStorage.removeItem('fit-bank-language');
         }
-        
-        // Only auto-redirect if not visited before or if reset parameter is present
-        const hasVisited = localStorage.getItem('fit-bank-visited');
-        if (!hasVisited || urlParams.get('reset') === 'true') {
-            setTimeout(detectAndRedirect, 1500);
-        } else {
-            // If user has visited before, just show the options without countdown
-            document.querySelector('.auto-redirect').style.display = 'none';
-        }
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === '1' || e.key === 'e' || e.key === 'E') {
-                document.getElementById('english-link').click();
-            } else if (e.key === '2' || e.key === 's' || e.key === 'S') {
-                document.getElementById('spanish-link').click();
-            }
-        });
-        
-        // Preload language pages for faster navigation
-        setTimeout(() => {
-            const englishLink = document.createElement('link');
-            englishLink.rel = 'prefetch';
-            englishLink.href = 'en/index.html';
-            document.head.appendChild(englishLink);
-            
-            const spanishLink = document.createElement('link');
-            spanishLink.rel = 'prefetch';
-            spanishLink.href = 'es/index.html';
-            document.head.appendChild(spanishLink);
-        }, 2000);
     </script>
 </body>
 </html>
