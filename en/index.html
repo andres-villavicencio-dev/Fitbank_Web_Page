@@ -12,8 +12,6 @@
     <link rel="alternate" hreflang="x-default" href="https://www.fit-bank.com/">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -45,43 +43,31 @@
     </script>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Streamlined Header -->
     <header>
         <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-logo">
                     <img src="../assets/logo_softwarehouse_large.b9e74024f957169272ab58d7596e8e65.svg" alt="FIT-BANK Logo" class="logo-img">
                 </div>
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="#home" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#about" class="nav-link">About</a>
-                    </li>
+                <ul class="nav-menu" id="navMenu">
                     <li class="nav-item">
                         <a href="#features" class="nav-link">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#architecture" class="nav-link">Architecture</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#modules" class="nav-link">Modules</a>
                     </li>
                     <li class="nav-item">
                         <a href="#clients" class="nav-link">Clients</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#ai-assistant" class="nav-link">AI Assistant</a>
-                    </li>
-                    <li class="nav-item">
                         <a href="#contact" class="nav-link">Contact</a>
                     </li>
+                    <li class="nav-item">
+                        <button class="nav-cta" onclick="scrollToSection('contact')">Get Demo</button>
+                    </li>
                     <li class="nav-item language-switcher">
-                        <a href="../es/index.html" class="nav-link">🇪🇸 ES</a>
+                        <a href="../es/" class="nav-link">🇪🇸 ES</a>
                     </li>
                 </ul>
-                <div class="hamburger">
+                <div class="hamburger" onclick="toggleMenu()">
                     <span class="bar"></span>
                     <span class="bar"></span>
                     <span class="bar"></span>
