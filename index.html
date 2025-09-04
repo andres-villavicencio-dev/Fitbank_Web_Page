@@ -10,6 +10,27 @@
     <link rel="alternate" hreflang="es" href="https://www.fit-bank.com/es/">
     <link rel="alternate" hreflang="x-default" href="https://www.fit-bank.com/">
     <style>
+        /* Professional Blue/Orange Color Palette for FIT-BANK */
+        :root {
+            --brand-primary: #0093EA;
+            --brand-primary-light: #33a9f0;
+            --brand-accent: #FF8B14;
+            --brand-accent-light: #ffad47;
+            --bg-dark: #0b1020;
+            --bg-secondary: #121933;
+            --text-primary: #e7ecff;
+            --text-secondary: #a8b0cf;
+            --border-radius: 16px;
+            --border-radius-small: 12px;
+            --spacing-xs: 8px;
+            --spacing-sm: 12px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-2xl: 48px;
+            --transition: all 0.3s ease;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -18,8 +39,8 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #0f1419 100%);
-            color: #ffffff;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-secondary) 50%, var(--bg-dark) 100%);
+            color: var(--text-primary);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -29,10 +50,10 @@
         
         .language-container {
             text-align: center;
-            padding: 3rem;
-            background: rgba(37, 51, 65, 0.9);
-            border-radius: 20px;
-            border: 1px solid rgba(0, 212, 170, 0.3);
+            padding: var(--spacing-2xl);
+            background: rgba(18, 25, 51, 0.9);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(0, 147, 234, 0.3);
             backdrop-filter: blur(15px);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             max-width: 600px;
@@ -41,7 +62,7 @@
         }
         
         .logo-container {
-            margin-bottom: 3rem;
+            margin-bottom: var(--spacing-2xl);
             animation: logoFloat 3s ease-in-out infinite;
         }
         
@@ -50,53 +71,54 @@
             width: auto;
             max-width: 320px;
             object-fit: contain;
-            filter: drop-shadow(0 4px 15px rgba(0, 212, 170, 0.3));
+            filter: drop-shadow(0 4px 15px rgba(0, 147, 234, 0.3));
         }
         
         h1 {
             font-size: 2.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #00d4aa, #0066cc);
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            font-weight: 700;
         }
         
         .subtitle {
             font-size: 1.3rem;
-            color: #a0aec0;
-            margin-bottom: 3rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-2xl);
             line-height: 1.6;
         }
         
         .language-buttons {
             display: flex;
-            gap: 2rem;
+            gap: var(--spacing-lg);
             justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 2rem;
+            margin-bottom: var(--spacing-lg);
         }
         
         .language-btn {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: var(--spacing-md);
             padding: 1.2rem 2.5rem;
-            background: linear-gradient(135deg, #00d4aa, #0066cc);
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-light));
             color: white;
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: var(--border-radius-small);
             font-size: 1.2rem;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             border: 2px solid transparent;
             min-width: 200px;
         }
         
         .language-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.4);
-            border-color: #00d4aa;
+            box-shadow: 0 10px 30px rgba(0, 147, 234, 0.4);
+            border-color: var(--brand-primary-light);
         }
         
         .flag {
@@ -104,32 +126,32 @@
         }
         
         .auto-redirect {
-            margin-top: 2rem;
+            margin-top: var(--spacing-lg);
             padding: 1.5rem;
-            background: rgba(0, 212, 170, 0.1);
+            background: rgba(0, 147, 234, 0.1);
             border-radius: 10px;
-            border-left: 4px solid #00d4aa;
+            border-left: 4px solid var(--brand-primary);
         }
         
         .auto-redirect h3 {
-            color: #00d4aa;
-            margin-bottom: 1rem;
+            color: var(--brand-primary);
+            margin-bottom: var(--spacing-md);
             font-size: 1.2rem;
         }
         
         .countdown {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #0066cc;
+            color: var(--brand-accent);
             margin: 0.5rem 0;
         }
         
         .redirect-links {
-            margin-top: 1rem;
+            margin-top: var(--spacing-md);
         }
         
         .redirect-links a {
-            color: #00d4aa;
+            color: var(--brand-primary);
             text-decoration: none;
             margin: 0 0.5rem;
             font-weight: 500;
@@ -137,12 +159,17 @@
         
         .redirect-links a:hover {
             text-decoration: underline;
+            color: var(--brand-primary-light);
         }
         
         .company-info {
-            margin-top: 2rem;
+            margin-top: var(--spacing-lg);
             font-size: 0.9rem;
-            color: #718096;
+            color: var(--text-secondary);
+        }
+        
+        .company-info strong {
+            color: var(--brand-accent);
         }
         
         @keyframes fadeInUp {
@@ -167,8 +194,8 @@
         
         @media (max-width: 768px) {
             .language-container {
-                padding: 2rem;
-                margin: 1rem;
+                padding: var(--spacing-lg);
+                margin: var(--spacing-md);
             }
             
             h1 {
@@ -182,7 +209,7 @@
             .language-buttons {
                 flex-direction: column;
                 align-items: center;
-                gap: 1rem;
+                gap: var(--spacing-md);
             }
             
             .language-btn {
@@ -243,7 +270,7 @@
         <div class="auto-redirect">
             <h3>🌐 Auto-Redirect</h3>
             <p>Redirecting based on your browser language in:</p>
-            <div class="countdown" id="countdown">5</div>
+            <div class="countdown" id="countdown">10</div>
             <p>
                 Or choose manually: 
                 <span class="redirect-links">

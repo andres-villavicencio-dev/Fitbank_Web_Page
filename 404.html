@@ -4,14 +4,271 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Not Found | FIT-BANK</title>
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Professional Blue/Orange Color Palette for FIT-BANK */
+        :root {
+            --brand-primary: #0093EA;
+            --brand-primary-light: #33a9f0;
+            --brand-accent: #FF8B14;
+            --brand-accent-light: #ffad47;
+            --bg-dark: #0b1020;
+            --bg-secondary: #121933;
+            --text-primary: #e7ecff;
+            --text-secondary: #a8b0cf;
+            --border-radius: 16px;
+            --border-radius-small: 12px;
+            --spacing-xs: 8px;
+            --spacing-sm: 12px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-2xl: 48px;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-secondary) 50%, var(--bg-dark) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+        
+        .language-selection {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: var(--spacing-lg);
+        }
+        
+        .language-container {
+            text-align: center;
+            padding: var(--spacing-2xl);
+            background: rgba(18, 25, 51, 0.9);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(0, 147, 234, 0.3);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 90%;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .language-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--brand-primary);
+            margin-bottom: var(--spacing-lg);
+            text-shadow: 0 2px 10px rgba(0, 147, 234, 0.3);
+        }
+        
+        h1 {
+            color: var(--brand-primary);
+            margin-bottom: var(--spacing-md);
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 900;
+            color: var(--brand-accent);
+            margin-bottom: var(--spacing-md);
+            text-shadow: 0 4px 20px rgba(255, 139, 20, 0.3);
+            line-height: 1;
+        }
+        
+        .error-message {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-xl);
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        
+        .language-options {
+            display: flex;
+            gap: var(--spacing-lg);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .language-link {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-light));
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius-small);
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            min-width: 200px;
+        }
+        
+        .language-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 147, 234, 0.4);
+            border-color: var(--brand-primary-light);
+        }
+        
+        .language-flag {
+            font-size: 1.5rem;
+        }
+        
+        .additional-links {
+            margin-top: var(--spacing-lg);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid rgba(0, 147, 234, 0.2);
+        }
+        
+        .additional-links h3 {
+            color: var(--brand-accent);
+            margin-bottom: var(--spacing-md);
+            font-size: 1.2rem;
+        }
+        
+        .link-grid {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .help-link {
+            color: var(--brand-primary);
+            text-decoration: none;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 1px solid rgba(0, 147, 234, 0.3);
+            border-radius: var(--border-radius-small);
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .help-link:hover {
+            background: rgba(0, 147, 234, 0.1);
+            border-color: var(--brand-primary);
+            color: var(--brand-primary-light);
+        }
+        
+        .company-info {
+            margin-top: var(--spacing-lg);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .company-info strong {
+            color: var(--brand-accent);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        .error-code {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @media (max-width: 768px) {
+            .language-container {
+                padding: var(--spacing-lg);
+                margin: var(--spacing-md);
+            }
+            
+            .error-code {
+                font-size: 5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .error-message {
+                font-size: 1.1rem;
+            }
+            
+            .language-options {
+                flex-direction: column;
+                align-items: center;
+                gap: var(--spacing-md);
+            }
+            
+            .language-link {
+                min-width: 250px;
+            }
+            
+            .link-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .language-container {
+                padding: 1.5rem;
+            }
+            
+            .error-code {
+                font-size: 4rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .language-link {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+                min-width: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="language-selection">
         <div class="language-container">
             <div class="language-logo">FIT-BANK</div>
-            <h1 style="color: var(--ink); margin-bottom: 1rem;">Page Not Found</h1>
-            <p style="color: var(--muted); margin-bottom: 2rem;">The page you're looking for doesn't exist.</p>
+            <div class="error-code">404</div>
+            <h1>Page Not Found</h1>
+            <p class="error-message">
+                The page you're looking for doesn't exist or has been moved.<br>
+                Please choose your language to continue to our homepage.
+            </p>
             
             <div class="language-options">
                 <a href="en/index.html" class="language-link">
@@ -23,6 +280,20 @@
                     <span class="language-flag">🇪🇸</span>
                     <span>Ir al Sitio en Español</span>
                 </a>
+            </div>
+            
+            <div class="additional-links">
+                <h3>Need Help?</h3>
+                <div class="link-grid">
+                    <a href="en/index.html#contact" class="help-link">Contact Support</a>
+                    <a href="en/index.html#about" class="help-link">About FIT-BANK</a>
+                    <a href="en/index.html#features" class="help-link">Our Solutions</a>
+                </div>
+            </div>
+            
+            <div class="company-info">
+                <p><strong>Soft Warehouse S.A.</strong> - Transforming Financial Institutions Since 2010</p>
+                <p>🏢 Quito, Ecuador | 📧 info@fit-bank.com</p>
             </div>
         </div>
     </div>
