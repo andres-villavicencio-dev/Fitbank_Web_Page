@@ -850,6 +850,24 @@ header {
   transition: var(--transition);
 }
 
+/* Client logo inside enhanced client cards */
+.client-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.client-logo img {
+  max-height: 50px;
+  max-width: 180px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(1) contrast(1.05) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.25));
+}
+
 .enhanced-client-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 15px 35px rgba(0, 147, 234, 0.15);
@@ -1875,6 +1893,12 @@ label {
 
 .client-logo-item.animate {
   animation: logoFadeIn 0.8s ease-out forwards;
+}
+
+/* Subtle animation when client logos appear */
+.client-logo img.loaded {
+  opacity: 1;
+  transition: opacity 0.4s ease, transform 0.3s ease;
 }
 
 .spinner {
