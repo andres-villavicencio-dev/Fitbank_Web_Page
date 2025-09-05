@@ -769,30 +769,44 @@
         </div>
     </section>
 
-    <!-- Enhanced Contact Section -->
+    <!-- Sección de Contacto Mejorada -->
     <section id="contact" class="contact">
         <div class="container">
             <h2>¿Listo para Revolucionar su Institución Financiera?</h2>
             <p class="section-subtitle">Únase a más de 35 instituciones que ya se están transformando con los 21 años de experiencia comprobada de FIT-BANK</p>
             
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Comience Hoy</h3>
-                    <div class="contact-item">
-                        <span class="contact-icon">📧</span>
-                        <span>info@fit-bank.com</span>
+            <div class="contact-content-enhanced">
+                <!-- Lado izquierdo con información de contacto e ilustración -->
+                <div class="contact-info-section">
+                    <div class="contact-info">
+                        <h3>Comience Hoy</h3>
+                        <div class="contact-item">
+                            <span class="contact-icon">📧</span>
+                            <span>info@fit-bank.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📱</span>
+                            <span>+593 2 XXX-XXXX</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">🏢</span>
+                            <span>Quito, Ecuador</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">🕒</span>
+                            <span>Lun a Vie: 09:00 AM – 06:00 PM</span>
+                        </div>
                     </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">📱</span>
-                        <span>+593 2 XXX-XXXX</span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">🏢</span>
-                        <span>Quito, Ecuador</span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">🕒</span>
-                        <span>Lun a Vie: 09:00 AM – 06:00 PM</span>
+                    
+                    <!-- Ilustración de la Casa -->
+                    <div class="house-illustration">
+                        <img src="../assets/house_illustrated.png" alt="Ilustración de la Oficina FIT-BANK" class="house-image">
+                        <div class="illustration-overlay">
+                            <div class="overlay-content">
+                                <h4>Visite Nuestra Sede Central</h4>
+                                <p>Soluciones bancarias modernas desde el corazón de Ecuador</p>
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="company-info">
@@ -802,32 +816,64 @@
                     </div>
                 </div>
                 
-                <div class="contact-form">
-                    <form id="contactForm" onsubmit="submitForm(event)">
-                        <div class="form-group">
-                            <input type="text" name="name" placeholder="Su Nombre" required>
+                <!-- Lado derecho con formulario de contacto -->
+                <div class="contact-form-section">
+                    <div class="contact-form">
+                        <div class="form-header">
+                            <h3>Solicitar Información</h3>
+                            <p>Conversemos sobre cómo FIT-BANK puede transformar su institución</p>
                         </div>
-                        <div class="form-group">
-                            <input type="email" name="email" placeholder="Correo Electrónico" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="institution" placeholder="Institución Financiera" required>
-                        </div>
-                        <div class="form-group">
-                            <select name="interest" required>
-                                <option value="">Seleccione su Interés</option>
-                                <option value="core-banking-cooperatives">Core Bancario para Cooperativas</option>
-                                <option value="core-banking-commercial">Core Bancario para Bancos Comerciales</option>
-                                <option value="erp-administrative">ERP Administrativo Financiero</option>
-                                <option value="modules-consultation">Consulta Módulos Específicos</option>
-                                <option value="full-solution">Solución Completa</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <textarea name="message" placeholder="Cuéntenos sobre las necesidades de su institución y desafíos actuales" rows="4"></textarea>
-                        </div>
-                        <button type="submit" class="btn-primary">Solicitar Información</button>
-                    </form>
+                        
+                        <form id="contactForm" onsubmit="submitForm(event)">
+                            <div class="form-group">
+                                <input type="text" name="name" placeholder="Su Nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" placeholder="Correo Electrónico" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="institution" placeholder="Institución Financiera" required>
+                            </div>
+                            <div class="form-group">
+                                <select name="interest" required>
+                                    <option value="">Seleccione su Interés</option>
+                                    <option value="core-banking-cooperatives">Core Bancario para Cooperativas</option>
+                                    <option value="core-banking-commercial">Core Bancario para Bancos Comerciales</option>
+                                    <option value="erp-administrative">ERP Administrativo Financiero</option>
+                                    <option value="modules-consultation">Consulta Módulos Específicos</option>
+                                    <option value="full-solution">Solución Completa</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <textarea name="message" placeholder="Cuéntenos sobre las necesidades de su institución y desafíos actuales" rows="4"></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary btn-large">Solicitar Información</button>
+                            
+                            <div class="form-footer">
+                                <p>🔒 Su información es segura y confidencial</p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Indicadores de confianza -->
+            <div class="trust-indicators">
+                <div class="trust-item">
+                    <span class="trust-icon">🏆</span>
+                    <span class="trust-text">21+ Años de Experiencia</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-icon">🌎</span>
+                    <span class="trust-text">5 Países Atendidos</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-icon">📈</span>
+                    <span class="trust-text">454% Crecimiento Comprobado</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-icon">🔒</span>
+                    <span class="trust-text">Seguridad Grado Bancario</span>
                 </div>
             </div>
         </div>
