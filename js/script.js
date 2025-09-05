@@ -19,6 +19,8 @@ let countdownInterval;
 document.addEventListener('DOMContentLoaded', function() {
     initializeNavigation();
     initializeScrollEffects();
+    // Initialize FAB-based floating AI chat before wiring chat logic
+    initializeAIFab();
     initializeAIAssistant();
     initializeContactForm();
     initializeLazyLoading();
@@ -177,11 +179,141 @@ function initializeIntersectionObserver() {
    ============================================================================ */
 
 /**
+ * Prefer floating chat elements when present, fallback to first matching IDs
+ */
+function getChatElements() {
+    const floating = document.getElementById('floatingChat');
+    const scope = floating || document;
+    const chatMessages = scope.querySelector('#chatMessages') || document.getElementById('chatMessages');
+    const userInput = scope.querySelector('#userInput') || document.getElementById('userInput');
+    return { chatMessages, userInput };
+}
+
+
+/**
+ * Build Floating Action Button (FAB) and floating chat container
+ * Injects into document.body and wires basic open/close accessibility behavior
+ */
+function initializeAIFab() {
+    // Avoid duplicate initialization
+    if (document.getElementById('aiFab') || document.getElementById('floatingChat')) {
+        return;
+    }
+
+    const isES = (document.documentElement.lang || 'en').toLowerCase().startsWith('es');
+    const txt = {
+        title: isES ? 'Asistente IA de FIT-BANK' : 'FIT-BANK AI Assistant',
+        online: isES ? '🤖 Asistente IA En Línea' : '🤖 AI Assistant Online',
+        placeholder: isES ? 'Pregunta sobre las soluciones FIT-BANK...' : 'Ask about FIT-BANK solutions...',
+        send: isES ? 'Enviar' : 'Send',
+        openAssistant: isES ? 'Abrir asistente' : 'Open assistant',
+        close: isES ? 'Cerrar' : 'Close'
+    };
+
+    // Create FAB button
+    const fab = document.createElement('button');
+    fab.id = 'aiFab';
+    fab.className = 'ai-fab';
+    fab.type = 'button';
+    fab.setAttribute('aria-label', txt.openAssistant);
+    fab.setAttribute('aria-expanded', 'false');
+    fab.setAttribute('aria-controls', 'floatingChat');
+    fab.innerHTML = '<span class="ai-fab-icon">💬</span>';
+
+    // Create floating chat wrapper and content
+    const floating = document.createElement('div');
+    floating.id = 'floatingChat';
+    floating.className = 'floating-chat';
+    floating.setAttribute('role', 'dialog');
+    floating.setAttribute('aria-modal', 'false');
+    floating.setAttribute('aria-label', txt.title);
+
+    floating.innerHTML = `
+      <div class="ai-chat-container" tabindex="-1">
+        <div class="ai-chat-header" style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+          <span class="ai-status">${txt.online}</span>
+          <button type="button" class="chat-close-btn" aria-label="${txt.close}" title="${txt.close}" style="background:transparent;color:var(--ink);border:none;font-size:20px;cursor:pointer;line-height:1;">×</button>
+        </div>
+        <div class="ai-chat-messages" id="chatMessages"></div>
+        <div class="ai-chat-input">
+          <input type="text" id="userInput" placeholder="${txt.placeholder}">
+          <button class="send-btn" type="button" onclick="sendMessage()">${txt.send}</button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(fab);
+    document.body.appendChild(floating);
+
+    // Toggle behavior
+    function openChat() {
+        floating.classList.add('open');
+        fab.setAttribute('aria-expanded', 'true');
+        floating.setAttribute('aria-modal', 'true');
+        // Focus input
+        const input = floating.querySelector('#userInput');
+        setTimeout(() => input && input.focus(), 0);
+    }
+    function closeChat() {
+        floating.classList.remove('open');
+        fab.setAttribute('aria-expanded', 'false');
+        floating.setAttribute('aria-modal', 'false');
+        fab.focus();
+    }
+
+    fab.addEventListener('click', () => {
+        if (floating.classList.contains('open')) {
+            closeChat();
+        } else {
+            openChat();
+        }
+    });
+
+    // Close button
+    const closeBtn = floating.querySelector('.chat-close-btn');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeChat);
+    }
+
+    // ESC to close when open
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && floating.classList.contains('open')) {
+            closeChat();
+        }
+    });
+
+    // Click outside to close
+    document.addEventListener('click', (e) => {
+        if (!floating.classList.contains('open')) return;
+        const container = floating.querySelector('.ai-chat-container');
+        if (container && !container.contains(e.target) && e.target !== fab && !fab.contains(e.target)) {
+            closeChat();
+        }
+    });
+
+    // Basic focus trap within chat when open
+    document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Tab' || !floating.classList.contains('open')) return;
+        const focusables = floating.querySelectorAll('button, [href], input, textarea, [tabindex]:not([tabindex="-1"])');
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        }
+    });
+}
+
+
+/**
  * Initialize AI Assistant chat functionality
  */
 function initializeAIAssistant() {
-    const chatMessages = document.getElementById('chatMessages');
-    const userInput = document.getElementById('userInput');
+    const { chatMessages, userInput } = getChatElements();
     
     // Initialize with welcome message if not already present
     if (chatMessages && chatMessages.children.length <= 1) {
@@ -198,7 +330,7 @@ function initializeAIAssistant() {
  * Add welcome message to chat
  */
 function addWelcomeMessage() {
-    const chatMessages = document.getElementById('chatMessages');
+    const { chatMessages } = getChatElements();
     if (!chatMessages) return;
     
     // Check if welcome message already exists
@@ -248,8 +380,7 @@ function handleKeyPress(event) {
  * Send message in AI chat
  */
 function sendMessage() {
-    const userInput = document.getElementById('userInput');
-    const chatMessages = document.getElementById('chatMessages');
+    const { userInput, chatMessages } = getChatElements();
     
     if (!userInput || !chatMessages) return;
     
@@ -352,7 +483,7 @@ function generateAIResponse(userMessage) {
  * @param {string} question - Predefined question
  */
 function askPredefined(question) {
-    const userInput = document.getElementById('userInput');
+    const { userInput } = getChatElements();
     if (userInput) {
         userInput.value = question;
         sendMessage();
