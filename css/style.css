@@ -509,6 +509,13 @@ html[lang="es"] .hero-image-section {
   color: white;
 }
 
+/* Standardize feature icon img size */
+.feature-icon img {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
 .feature-card h3 {
   margin: 0 0 var(--spacing-sm);
   color: var(--ink);
