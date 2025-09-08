@@ -193,12 +193,12 @@ header {
 .hero {
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* raise content toward top */
   justify-content: center;
   position: relative;
   background: linear-gradient(135deg, rgba(11, 16, 32, 0.9), rgba(18, 25, 51, 0.9));
   overflow: hidden;
-  padding: var(--spacing-2xl) 0;
+  padding: var(--spacing-lg) 0 var(--spacing-2xl); /* reduce top padding */
 }
 
 .hero-container {
@@ -209,7 +209,7 @@ header {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-2xl);
-  align-items: center;
+  align-items: start; /* align grid items to top */
   min-height: 80vh;
 }
 
@@ -220,6 +220,11 @@ header {
   align-items: center;
   justify-content: center;
   order: 1;
+}
+
+/* Spanish: top-align hero image to match EN */
+html[lang="es"] .hero-image-section {
+  align-items: flex-start;
 }
 
 .hero-image-wrapper {
