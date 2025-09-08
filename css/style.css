@@ -247,65 +247,8 @@ header {
   transform: scale(1.02);
 }
 
-.hero-image-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-}
 
-/* Floating Elements */
-.floating-elements {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding: var(--spacing-lg);
-  pointer-events: none;
-}
 
-.floating-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 147, 234, 0.2);
-  padding: var(--spacing-md) var(--spacing-lg);
-  border-radius: var(--border-radius-small);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  color: var(--bg);
-  font-weight: 600;
-  font-size: 0.9rem;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  animation: float 3s ease-in-out infinite;
-  max-width: 220px;
-}
-
-.floating-card:nth-child(1) {
-  align-self: flex-start;
-  animation-delay: 0s;
-}
-
-.floating-card:nth-child(2) {
-  align-self: flex-end;
-  animation-delay: 1s;
-}
-
-.floating-card:nth-child(3) {
-  align-self: flex-start;
-  animation-delay: 2s;
-}
-
-.card-icon {
-  font-size: 1.2rem;
-  flex-shrink: 0;
-}
 
 /* Hero Content Section */
 .hero-content {
@@ -1897,14 +1840,6 @@ label {
   }
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
 
 @keyframes fadeInUp {
   from {
