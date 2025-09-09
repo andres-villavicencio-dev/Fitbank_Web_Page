@@ -1594,6 +1594,44 @@ label {
   margin-bottom: var(--spacing-md);
 }
 
+/* CTA buttons for hero call-to-action sections */
+.btn-accent,
+.btn-ghost-light {
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--border-radius-small);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, var(--brand-accent), var(--brand-accent-light));
+  color: white;
+}
+
+.btn-accent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 139, 20, 0.3);
+  color: white;
+}
+
+.btn-ghost-light {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-ghost-light:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
 /* Professional button variations */
 .btn-outline-primary {
   background: transparent;
