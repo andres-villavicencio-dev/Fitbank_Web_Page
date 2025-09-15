@@ -109,6 +109,7 @@ function scrollToSection(sectionId) {
 function initializeScrollEffects() {
     initializeHeaderScrollEffect();
     initializeIntersectionObserver();
+    initializeParallaxScrollEffect();
 }
 
 /**
@@ -172,6 +173,90 @@ function initializeIntersectionObserver() {
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
+}
+
+/**
+ * Enhanced Parallax Scroll Effect for Background Images
+ * Creates depth by moving background images slower than content
+ */
+function initializeParallaxScrollEffect() {
+    // Check for reduced motion preference
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+    }
+    
+    // Check for mobile devices - disable parallax for better performance
+    const isMobile = window.innerWidth <= 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile) {
+        return;
+    }
+    
+    // Get all parallax sections
+    const parallaxSections = document.querySelectorAll('.features, .architecture, #clients');
+    
+    if (parallaxSections.length === 0) {
+        return;
+    }
+    
+    let ticking = false;
+    
+    // Throttled scroll handler for better performance
+    function updateParallax() {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.5; // Negative value for upward movement
+        
+        parallaxSections.forEach((section, index) => {
+            const rect = section.getBoundingClientRect();
+            const sectionTop = rect.top + scrolled;
+            const sectionHeight = rect.height;
+            
+            // Only apply parallax when section is visible in viewport
+            if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
+                const yPos = -(scrolled - sectionTop) * 0.3; // Adjust speed (0.3 = 30% of scroll speed)
+                const backgroundElement = section.querySelector('::after') || section;
+                
+                // Apply transform with GPU acceleration
+                const transform = `translate3d(0, ${yPos}px, 0) scale(1.1)`;
+                
+                // Use CSS custom property for better performance
+                section.style.setProperty('--parallax-y', `${yPos}px`);
+                
+                // Apply to pseudo-element if available
+                if (section.classList.contains('features')) {
+                    section.style.setProperty('--features-parallax', transform);
+                } else if (section.classList.contains('architecture')) {
+                    section.style.setProperty('--architecture-parallax', transform);
+                } else if (section.id === 'clients') {
+                    section.style.setProperty('--clients-parallax', transform);
+                }
+            }
+        });
+        
+        ticking = false;
+    }
+    
+    // Throttled scroll event listener
+    function onScroll() {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }
+    
+    // Add scroll event listener
+    window.addEventListener('scroll', onScroll, { passive: true });
+    
+    // Initialize on load
+    updateParallax();
+    
+    // Handle resize events
+    window.addEventListener('resize', debounce(function() {
+        // Re-check mobile status
+        const newIsMobile = window.innerWidth <= 768;
+        if (newIsMobile) {
+            window.removeEventListener('scroll', onScroll);
+        }
+    }, 250));
 }
 
 /* ============================================================================

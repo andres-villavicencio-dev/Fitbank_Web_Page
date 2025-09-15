@@ -2752,8 +2752,35 @@ textarea:focus,
 }
 
 /* ============================================================================
-   29. SECTION BACKGROUND IMAGES
+   29. SECTION BACKGROUND IMAGES WITH ENHANCED PARALLAX EFFECT
    ============================================================================ */
+
+/* Base parallax container setup */
+.features,
+.architecture,
+#clients {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+/* Parallax background layers for each section */
+.features::after,
+.architecture::after,
+#clients::after {
+  content: '';
+  position: fixed;
+  top: -20%;
+  left: 0;
+  right: 0;
+  bottom: -20%;
+  z-index: -2;
+  background-size: 120% auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+  will-change: transform;
+  transform: translateZ(0);
+}
 
 /* Features Section Background - Golden Circuit */
 .features {
@@ -2762,13 +2789,11 @@ textarea:focus,
       rgba(11, 16, 32, 0.92) 0%, 
       rgba(18, 25, 51, 0.88) 50%, 
       rgba(11, 16, 32, 0.92) 100%
-    ),
-    url('../assets/golden_circuit.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  position: relative;
+    );
+}
+
+.features::after {
+  background-image: url('../assets/golden_circuit.png');
 }
 
 /* Architecture Section Background - Layered Architecture */
@@ -2778,13 +2803,11 @@ textarea:focus,
       rgba(11, 16, 32, 0.90) 0%, 
       rgba(18, 25, 51, 0.85) 50%, 
       rgba(11, 16, 32, 0.90) 100%
-    ),
-    url('../assets/layersArch.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  position: relative;
+    );
+}
+
+.architecture::after {
+  background-image: url('../assets/layersArch.png');
 }
 
 /* Clients Section Background - Global Network */
@@ -2794,16 +2817,14 @@ textarea:focus,
       rgba(11, 16, 32, 0.88) 0%, 
       rgba(18, 25, 51, 0.82) 50%, 
       rgba(11, 16, 32, 0.88) 100%
-    ),
-    url('../assets/global_network.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  position: relative;
+    );
 }
 
-/* Enhanced overlay patterns for better text readability */
+#clients::after {
+  background-image: url('../assets/global_network.png');
+}
+
+/* Enhanced overlay patterns for better text readability and depth */
 .features::before,
 .architecture::before,
 #clients::before {
@@ -2813,12 +2834,19 @@ textarea:focus,
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(0, 147, 234, 0.03) 0%,
-    rgba(11, 16, 32, 0.15) 70%,
-    rgba(11, 16, 32, 0.3) 100%
-  );
+  background: 
+    radial-gradient(
+      ellipse at center,
+      rgba(0, 147, 234, 0.03) 0%,
+      rgba(11, 16, 32, 0.15) 70%,
+      rgba(11, 16, 32, 0.4) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(11, 16, 32, 0.1) 0%,
+      rgba(11, 16, 32, 0.05) 50%,
+      rgba(11, 16, 32, 0.2) 100%
+    );
   pointer-events: none;
   z-index: 1;
 }
@@ -2832,12 +2860,51 @@ textarea:focus,
   z-index: 2;
 }
 
-/* Mobile responsive backgrounds - disable fixed attachment for better performance */
+/* Parallax animation keyframes */
+@keyframes parallaxScroll {
+  0% { transform: translateY(0) scale(1.2); }
+  100% { transform: translateY(-100px) scale(1.2); }
+}
+
+/* CSS-only parallax fallback for browsers without JavaScript */
+@media (prefers-reduced-motion: no-preference) {
+  .features::after,
+  .architecture::after,
+  #clients::after {
+    animation: parallaxScroll 60s ease-in-out infinite alternate;
+  }
+}
+
+/* Mobile responsive backgrounds - use static backgrounds for performance */
 @media (max-width: 768px) {
   .features,
   .architecture,
   #clients {
-    background-attachment: scroll;
+    min-height: auto;
+    overflow: visible;
+  }
+  
+  .features::after,
+  .architecture::after,
+  #clients::after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center center;
+    animation: none;
+    transform: none !important;
+    transition: none;
+    will-change: auto;
+  }
+}
+
+/* Tablet responsive - reduce parallax intensity */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .features::after,
+  .architecture::after,
+  #clients::after {
+    background-size: 110% auto;
   }
 }
 
@@ -2846,24 +2913,59 @@ textarea:focus,
   .features,
   .architecture,
   #clients {
-    background-image: none;
     background: var(--bg);
   }
   
   .features::before,
+  .features::after,
   .architecture::before,
-  #clients::before {
+  .architecture::after,
+  #clients::before,
+  #clients::after {
     display: none;
   }
 }
 
-/* Reduced motion preference - disable parallax effect */
+/* Reduced motion preference - disable all parallax effects */
 @media (prefers-reduced-motion: reduce) {
-  .features,
-  .architecture,
-  #clients {
-    background-attachment: scroll;
+  .features::after,
+  .architecture::after,
+  #clients::after {
+    position: absolute;
+    animation: none;
+    transform: none;
+    background-size: cover;
   }
+}
+
+/* Enhanced performance for modern browsers with GPU acceleration */
+@supports (will-change: transform) {
+  .features::after,
+  .architecture::after,
+  #clients::after {
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* JavaScript-enhanced parallax transforms */
+.features::after {
+  transform: var(--features-parallax, translate3d(0, 0, 0) scale(1.1));
+}
+
+.architecture::after {
+  transform: var(--architecture-parallax, translate3d(0, 0, 0) scale(1.1));
+}
+
+#clients::after {
+  transform: var(--clients-parallax, translate3d(0, 0, 0) scale(1.1));
+}
+
+/* Smooth transition for parallax effect */
+.features::after,
+.architecture::after,
+#clients::after {
+  transition: transform 0.1s ease-out;
 }
 
 /* ============================================================================
