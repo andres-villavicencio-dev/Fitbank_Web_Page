@@ -2752,5 +2752,120 @@ textarea:focus,
 }
 
 /* ============================================================================
+   29. SECTION BACKGROUND IMAGES
+   ============================================================================ */
+
+/* Features Section Background - Golden Circuit */
+.features {
+  background: 
+    linear-gradient(135deg, 
+      rgba(11, 16, 32, 0.92) 0%, 
+      rgba(18, 25, 51, 0.88) 50%, 
+      rgba(11, 16, 32, 0.92) 100%
+    ),
+    url('../assets/golden_circuit.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+}
+
+/* Architecture Section Background - Layered Architecture */
+.architecture {
+  background: 
+    linear-gradient(135deg, 
+      rgba(11, 16, 32, 0.90) 0%, 
+      rgba(18, 25, 51, 0.85) 50%, 
+      rgba(11, 16, 32, 0.90) 100%
+    ),
+    url('../assets/layersArch.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+}
+
+/* Clients Section Background - Global Network */
+#clients {
+  background: 
+    linear-gradient(135deg, 
+      rgba(11, 16, 32, 0.88) 0%, 
+      rgba(18, 25, 51, 0.82) 50%, 
+      rgba(11, 16, 32, 0.88) 100%
+    ),
+    url('../assets/global_network.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+}
+
+/* Enhanced overlay patterns for better text readability */
+.features::before,
+.architecture::before,
+#clients::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 147, 234, 0.03) 0%,
+    rgba(11, 16, 32, 0.15) 70%,
+    rgba(11, 16, 32, 0.3) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ensure content appears above background overlays */
+.features .container,
+.architecture .container,
+#clients .hero-inner,
+#clients .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Mobile responsive backgrounds - disable fixed attachment for better performance */
+@media (max-width: 768px) {
+  .features,
+  .architecture,
+  #clients {
+    background-attachment: scroll;
+  }
+}
+
+/* High contrast mode - ensure backgrounds don't interfere with readability */
+@media (prefers-contrast: high) {
+  .features,
+  .architecture,
+  #clients {
+    background-image: none;
+    background: var(--bg);
+  }
+  
+  .features::before,
+  .architecture::before,
+  #clients::before {
+    display: none;
+  }
+}
+
+/* Reduced motion preference - disable parallax effect */
+@media (prefers-reduced-motion: reduce) {
+  .features,
+  .architecture,
+  #clients {
+    background-attachment: scroll;
+  }
+}
+
+/* ============================================================================
    END OF ORGANIZED FIT-BANK STYLES
    ============================================================================ */
