@@ -456,11 +456,12 @@ html[lang="es"] .hero-image-section {
 }
 
 .features h2 {
-  text-align: center;
-  margin: 0 0 var(--spacing-md);
-  color: var(--ink);
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  background: linear-gradient(135deg, var(--ink), var(--brand-primary-light));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: var(--spacing-md);
 }
 
 .features .section-subtitle {
@@ -535,16 +536,15 @@ html[lang="es"] .hero-image-section {
    ============================================================================ */
 .architecture {
     background: var(--bg);
-    padding: 100px 0;
+    padding: 140px 0;
 }
 
 .architecture h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .architecture-layers {
@@ -1817,7 +1817,7 @@ label {
    ============================================================================ */
 .section {
   scroll-margin-top: 72px;
-  padding: var(--spacing-2xl) 0;
+  padding: 120px 0;
 }
 
 .section .container {
@@ -1828,19 +1828,22 @@ label {
 
 .section h2 {
   text-align: center;
-  margin: 0 0 var(--spacing-md);
+  margin: 0 0 var(--spacing-xl); /* Increased margin */
   color: var(--ink);
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 4vw, 3rem); /* Responsive sizing */
   font-weight: 700;
+  padding: 0 var(--spacing-lg); /* Horizontal padding */
+  line-height: 1.2;
 }
 
 .section .section-subtitle {
   text-align: center;
   color: var(--muted);
-  font-size: 1.1rem;
-  max-width: 800px;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  max-width: 900px; /* Increased from 800px */
   margin: 0 auto var(--spacing-2xl);
-  line-height: 1.6;
+  line-height: 1.7;
+  padding: 0 var(--spacing-lg);
 }
 
 /* Page Hero */
@@ -2276,8 +2279,9 @@ label {
   }
   
   .features-grid {
-    grid-template-columns: 1fr;
+    margin-top: 100px; /* Increased spacing */
   }
+
   
   .nav-menu {
     display: none;
@@ -2480,11 +2484,11 @@ label {
   }
   
   .architecture-layers {
-    grid-template-columns: 1fr;
+    margin-top: 100px;
   }
   
   .modules-grid {
-    grid-template-columns: 1fr;
+    margin-top: 100px;
   }
   
   .layer-header {
@@ -2779,6 +2783,7 @@ textarea:focus,
   background-size: cover, 120%;
   background-position: center, center;
   background-attachment: scroll, fixed;
+  padding: 140px 0;
 }
 
 /* Architecture Section Background - Layered Architecture */
@@ -2847,11 +2852,19 @@ textarea:focus,
 
 /* Mobile responsive backgrounds - use static backgrounds for performance */
 @media (max-width: 768px) {
-  .features,
-  .architecture,
-  #clients {
-    background-attachment: scroll, scroll;
-    background-size: cover, cover;
+  .section {
+    padding: 80px 0; /* Reduced but generous */
+  }
+  
+  .section h2 {
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    padding: 0 var(--spacing-md);
+  }
+  
+  .features-grid,
+  .architecture-layers,
+  .modules-grid {
+    margin-top: 60px;
   }
 }
 
