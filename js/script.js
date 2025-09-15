@@ -177,7 +177,7 @@ function initializeIntersectionObserver() {
 
 /**
  * Enhanced Parallax Scroll Effect for Background Images
- * Creates depth by moving background images slower than content
+ * Creates depth by adjusting background position based on scroll
  */
 function initializeParallaxScrollEffect() {
     // Check for reduced motion preference
@@ -203,32 +203,18 @@ function initializeParallaxScrollEffect() {
     // Throttled scroll handler for better performance
     function updateParallax() {
         const scrolled = window.pageYOffset;
-        const rate = scrolled * -0.5; // Negative value for upward movement
         
-        parallaxSections.forEach((section, index) => {
+        parallaxSections.forEach((section) => {
             const rect = section.getBoundingClientRect();
             const sectionTop = rect.top + scrolled;
-            const sectionHeight = rect.height;
             
             // Only apply parallax when section is visible in viewport
             if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
-                const yPos = -(scrolled - sectionTop) * 0.3; // Adjust speed (0.3 = 30% of scroll speed)
-                const backgroundElement = section.querySelector('::after') || section;
+                // Calculate parallax offset (background moves slower than scroll)
+                const parallaxOffset = (scrolled - sectionTop) * 0.5;
                 
-                // Apply transform with GPU acceleration
-                const transform = `translate3d(0, ${yPos}px, 0) scale(1.1)`;
-                
-                // Use CSS custom property for better performance
-                section.style.setProperty('--parallax-y', `${yPos}px`);
-                
-                // Apply to pseudo-element if available
-                if (section.classList.contains('features')) {
-                    section.style.setProperty('--features-parallax', transform);
-                } else if (section.classList.contains('architecture')) {
-                    section.style.setProperty('--architecture-parallax', transform);
-                } else if (section.id === 'clients') {
-                    section.style.setProperty('--clients-parallax', transform);
-                }
+                // Update background position to create parallax effect
+                section.style.backgroundPosition = `center, center ${parallaxOffset}px`;
             }
         });
         
@@ -255,6 +241,10 @@ function initializeParallaxScrollEffect() {
         const newIsMobile = window.innerWidth <= 768;
         if (newIsMobile) {
             window.removeEventListener('scroll', onScroll);
+            // Reset background positions on mobile
+            parallaxSections.forEach(section => {
+                section.style.backgroundPosition = 'center, center';
+            });
         }
     }, 250));
 }
