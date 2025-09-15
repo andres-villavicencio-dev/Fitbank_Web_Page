@@ -33,8 +33,7 @@ https://www.fit-bank.com/ # Language selection page https://www.fit-bank.com/en/
 
 1. **Upload Files**: Copy entire structure to web server
 2. **Configure Apache**: Ensure .htaccess is processed
-3. **Update URLs**: Replace `www.fit-bank.com` with your domain
-4. **SSL Setup**: Configure HTTPS (required for modern SEO)
-5. **Test Redirects**: Verify language switching works
+3. **SSL Setup**: Configure HTTPS (required for modern SEO)
+4. **Test Redirects**: Verify language switching works
 
 
