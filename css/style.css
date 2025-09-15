@@ -1594,6 +1594,44 @@ label {
   margin-bottom: var(--spacing-md);
 }
 
+/* CTA buttons for hero call-to-action sections */
+.btn-accent,
+.btn-ghost-light {
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--border-radius-small);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, var(--brand-accent), var(--brand-accent-light));
+  color: white;
+}
+
+.btn-accent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 139, 20, 0.3);
+  color: white;
+}
+
+.btn-ghost-light {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-ghost-light:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
 /* Professional button variations */
 .btn-outline-primary {
   background: transparent;
@@ -2710,6 +2748,134 @@ textarea:focus,
   
   .container {
     max-width: 100%;
+  }
+}
+
+/* ============================================================================
+   29. SECTION BACKGROUND IMAGES WITH ENHANCED PARALLAX EFFECT
+   ============================================================================ */
+
+/* Base parallax container setup */
+.features,
+.architecture,
+#clients {
+  position: relative;
+  overflow: hidden;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* Features Section Background - Golden Circuit */
+.features {
+  background: 
+    linear-gradient(135deg, 
+      rgba(11, 16, 32, 0.92) 0%, 
+      rgba(18, 25, 51, 0.88) 50%, 
+      rgba(11, 16, 32, 0.92) 100%
+    ),
+    url('../assets/golden_circuit.png');
+  background-size: cover, 120%;
+  background-position: center, center;
+  background-attachment: scroll, fixed;
+}
+
+/* Architecture Section Background - Layered Architecture */
+.architecture {
+  background: 
+    linear-gradient(135deg, 
+      rgba(11, 16, 32, 0.90) 0%, 
+      rgba(18, 25, 51, 0.85) 50%, 
+      rgba(11, 16, 32, 0.90) 100%
+    ),
+    url('../assets/layersArch.png');
+  background-size: cover, 120%;
+  background-position: center, center;
+  background-attachment: scroll, fixed;
+}
+
+/* Clients Section Background - Global Network */
+#clients {
+  background: 
+    linear-gradient(135deg, 
+      rgba(11, 16, 32, 0.88) 0%, 
+      rgba(18, 25, 51, 0.82) 50%, 
+      rgba(11, 16, 32, 0.88) 100%
+    ),
+    url('../assets/global_network.png');
+  background-size: cover, 120%;
+  background-position: center, center;
+  background-attachment: scroll, fixed;
+}
+
+/* Enhanced overlay patterns for better text readability and depth */
+.features::before,
+.architecture::before,
+#clients::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(
+      ellipse at center,
+      rgba(0, 147, 234, 0.03) 0%,
+      rgba(11, 16, 32, 0.15) 70%,
+      rgba(11, 16, 32, 0.4) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(11, 16, 32, 0.1) 0%,
+      rgba(11, 16, 32, 0.05) 50%,
+      rgba(11, 16, 32, 0.2) 100%
+    );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ensure content appears above background overlays */
+.features .container,
+.architecture .container,
+#clients .hero-inner,
+#clients .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Mobile responsive backgrounds - use static backgrounds for performance */
+@media (max-width: 768px) {
+  .features,
+  .architecture,
+  #clients {
+    background-attachment: scroll, scroll;
+    background-size: cover, cover;
+  }
+}
+
+/* High contrast mode - ensure backgrounds don't interfere with readability */
+@media (prefers-contrast: high) {
+  .features,
+  .architecture,
+  #clients {
+    background: var(--bg);
+  }
+  
+  .features::before,
+  .architecture::before,
+  #clients::before {
+    display: none;
+  }
+}
+
+/* Reduced motion preference - disable parallax effects */
+@media (prefers-reduced-motion: reduce) {
+  .features,
+  .architecture,
+  #clients {
+    background-attachment: scroll, scroll;
   }
 }
 

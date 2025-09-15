@@ -109,6 +109,7 @@ function scrollToSection(sectionId) {
 function initializeScrollEffects() {
     initializeHeaderScrollEffect();
     initializeIntersectionObserver();
+    initializeParallaxScrollEffect();
 }
 
 /**
@@ -174,6 +175,80 @@ function initializeIntersectionObserver() {
     });
 }
 
+/**
+ * Enhanced Parallax Scroll Effect for Background Images
+ * Creates depth by adjusting background position based on scroll
+ */
+function initializeParallaxScrollEffect() {
+    // Check for reduced motion preference
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+    }
+    
+    // Check for mobile devices - disable parallax for better performance
+    const isMobile = window.innerWidth <= 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile) {
+        return;
+    }
+    
+    // Get all parallax sections
+    const parallaxSections = document.querySelectorAll('.features, .architecture, #clients');
+    
+    if (parallaxSections.length === 0) {
+        return;
+    }
+    
+    let ticking = false;
+    
+    // Throttled scroll handler for better performance
+    function updateParallax() {
+        const scrolled = window.pageYOffset;
+        
+        parallaxSections.forEach((section) => {
+            const rect = section.getBoundingClientRect();
+            const sectionTop = rect.top + scrolled;
+            
+            // Only apply parallax when section is visible in viewport
+            if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
+                // Calculate parallax offset (background moves slower than scroll)
+                const parallaxOffset = (scrolled - sectionTop) * 0.5;
+                
+                // Update background position to create parallax effect
+                section.style.backgroundPosition = `center, center ${parallaxOffset}px`;
+            }
+        });
+        
+        ticking = false;
+    }
+    
+    // Throttled scroll event listener
+    function onScroll() {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }
+    
+    // Add scroll event listener
+    window.addEventListener('scroll', onScroll, { passive: true });
+    
+    // Initialize on load
+    updateParallax();
+    
+    // Handle resize events
+    window.addEventListener('resize', debounce(function() {
+        // Re-check mobile status
+        const newIsMobile = window.innerWidth <= 768;
+        if (newIsMobile) {
+            window.removeEventListener('scroll', onScroll);
+            // Reset background positions on mobile
+            parallaxSections.forEach(section => {
+                section.style.backgroundPosition = 'center, center';
+            });
+        }
+    }, 250));
+}
+
 /* ============================================================================
    5. AI ASSISTANT FUNCTIONALITY
    ============================================================================ */
@@ -183,9 +258,13 @@ function initializeIntersectionObserver() {
  */
 function getChatElements() {
     const floating = document.getElementById('floatingChat');
-    const scope = floating || document;
-    const chatMessages = scope.querySelector('#chatMessages') || document.getElementById('chatMessages');
-    const userInput = scope.querySelector('#userInput') || document.getElementById('userInput');
+    if (floating) {
+        const chatMessages = floating.querySelector('#floatingChatMessages');
+        const userInput = floating.querySelector('#floatingUserInput');
+        return { chatMessages, userInput };
+    }
+    const chatMessages = document.getElementById('chatMessages');
+    const userInput = document.getElementById('userInput');
     return { chatMessages, userInput };
 }
 
@@ -234,9 +313,9 @@ function initializeAIFab() {
           <span class="ai-status">${txt.online}</span>
           <button type="button" class="chat-close-btn" aria-label="${txt.close}" title="${txt.close}" style="background:transparent;color:var(--ink);border:none;font-size:20px;cursor:pointer;line-height:1;">×</button>
         </div>
-        <div class="ai-chat-messages" id="chatMessages"></div>
+        <div class="ai-chat-messages" id="floatingChatMessages"></div>
         <div class="ai-chat-input">
-          <input type="text" id="userInput" placeholder="${txt.placeholder}">
+          <input type="text" id="floatingUserInput" placeholder="${txt.placeholder}">
           <button class="send-btn" type="button" onclick="sendMessage()">${txt.send}</button>
         </div>
       </div>
@@ -251,7 +330,7 @@ function initializeAIFab() {
         fab.setAttribute('aria-expanded', 'true');
         floating.setAttribute('aria-modal', 'true');
         // Focus input
-        const input = floating.querySelector('#userInput');
+        const input = floating.querySelector('#floatingUserInput');
         setTimeout(() => input && input.focus(), 0);
     }
     function closeChat() {
