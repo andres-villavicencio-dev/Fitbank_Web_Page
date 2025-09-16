@@ -9,6 +9,9 @@
 let countdownTimer = 10;
 let countdownInterval;
 
+// Company founding year
+const COMPANY_FOUNDING_YEAR = 2002;
+
 /* ============================================================================
    2. INITIALIZATION & DOM READY
    ============================================================================ */
@@ -25,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeContactForm();
     initializeLazyLoading();
     checkBrowserSupport();
+    updateYearsOfExperience();
 });
 
 /* ============================================================================
@@ -604,7 +608,8 @@ function generateAIResponse(userMessage) {
     
     // Company experience
     if (message.includes('experience') || message.includes('company') || message.includes('years')) {
-        return "Soft Warehouse S.A. has over 21 years of experience in technological consulting and specialized system development for the Latin American financial sector. We've successfully served 35+ financial institutions across 5 countries, with proven results like 454% average asset growth for our clients.";
+        const years = calculateYearsOfExperience();
+        return `Soft Warehouse S.A. has over ${years} years of experience in technological consulting and specialized system development for the Latin American financial sector. We've successfully served 35+ financial institutions across 5 countries, with proven results like 454% average asset growth for our clients.`;
     }
     
     // Default response
@@ -1053,6 +1058,79 @@ function isElementInViewport(element) {
         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
         rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
+}
+
+/* ============================================================================
+   COMPANY YEARS OF EXPERIENCE FUNCTIONS
+   ============================================================================ */
+
+/**
+ * Calculate years of experience since company founding
+ * @returns {number} Years of experience
+ */
+function calculateYearsOfExperience() {
+    const currentYear = new Date().getFullYear();
+    return currentYear - COMPANY_FOUNDING_YEAR;
+}
+
+/**
+ * Get years of experience as formatted string (e.g., "22+")
+ * @returns {string} Formatted years string
+ */
+function getYearsOfExperienceString() {
+    return calculateYearsOfExperience() + '+';
+}
+
+/**
+ * Update all elements with years of experience throughout the page
+ */
+function updateYearsOfExperience() {
+    const yearsString = getYearsOfExperienceString();
+    const years = calculateYearsOfExperience();
+    
+    // Update all elements with data-years-experience attribute
+    const yearsElements = document.querySelectorAll('[data-years-experience]');
+    
+    yearsElements.forEach(element => {
+        const format = element.getAttribute('data-years-experience');
+        
+        if (format === 'number') {
+            element.textContent = yearsString;
+        } else if (format === 'full') {
+            // For full descriptions, replace "21+" or "21 " with current years
+            element.innerHTML = element.innerHTML
+                .replace(/21\+/g, yearsString)
+                .replace(/21 años/g, `${years} años`)
+                .replace(/21 years/g, `${years} years`)
+                .replace(/Más de 21/g, `Más de ${years}`)
+                .replace(/over 21/g, `over ${years}`);
+        }
+    });
+    
+    // Update meta description
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+        const currentContent = metaDesc.getAttribute('content');
+        const updatedContent = currentContent.replace(/21\+/g, yearsString);
+        metaDesc.setAttribute('content', updatedContent);
+    }
+    
+    // Update AI Assistant responses that mention years
+    updateAIResponseYears(years);
+}
+
+/**
+ * Update AI Assistant predefined responses with current years
+ * @param {number} years - Current years of experience
+ */
+function updateAIResponseYears(years) {
+    // Update any predefined question buttons
+    const experienceButtons = document.querySelectorAll('[onclick*="21 years"]');
+    experienceButtons.forEach(button => {
+        const currentOnclick = button.getAttribute('onclick');
+        const updatedOnclick = currentOnclick.replace(/21 años/g, `${years} años`).replace(/21 years/g, `${years} years`);
+        button.setAttribute('onclick', updatedOnclick);
+    });
 }
 
 /* ============================================================================
