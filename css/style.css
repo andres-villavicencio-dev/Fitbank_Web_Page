@@ -292,8 +292,6 @@ html[lang="es"] .hero-image-section {
   border-radius: var(--border-radius);
   border: 1px solid rgba(0, 147, 234, 0.2);
   backdrop-filter: blur(10px);
-  overflow-y: auto;
-  max-height: 600px;
 }
 
 .hero-logo-large {
@@ -2403,10 +2401,6 @@ label {
 
   .hero-container-with-clients .hero-content {
     grid-row: auto; /* Reset row span for mobile */
-  }
-
-  .hero-clients-section {
-    max-height: none;
   }
 
   .hero-image-section {
