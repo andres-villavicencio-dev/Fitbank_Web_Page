@@ -837,18 +837,46 @@ html[lang="es"] .hero-image-section {
   transition: var(--transition);
 }
 
+/* Hero Clients Section Container */
+.hero-clients-section {
+  max-height: 600px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--spacing-md);
+  scrollbar-width: thin;
+  scrollbar-color: var(--brand-primary) var(--chip);
+}
+
+.hero-clients-section::-webkit-scrollbar {
+  width: 8px;
+}
+
+.hero-clients-section::-webkit-scrollbar-track {
+  background: var(--chip);
+  border-radius: 10px;
+}
+
+.hero-clients-section::-webkit-scrollbar-thumb {
+  background: var(--brand-primary);
+  border-radius: 10px;
+}
+
+.hero-clients-section::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-primary-light);
+}
+
 /* Client logo inside enhanced client cards */
 .client-logo {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60px;
+  height: 45px;
   margin-bottom: var(--spacing-sm);
 }
 
 .client-logo img {
-  max-height: 50px;
-  max-width: 180px;
+  max-height: 35px;
+  max-width: 120px;
   width: auto;
   height: auto;
   object-fit: contain;
