@@ -94,6 +94,24 @@
                 <h1>Revolutionizing Banking Systems</h1>
                 <p class="hero-subtitle">The Most Comprehensive Integrated Central Banking System</p>
                 <p class="hero-description">Discover the pinnacle of banking management automation with FIT-BANK. Tailor-made to optimize operations, improve profitability, and elevate customer service. Empowering financial institutions to launch new products effortlessly and revitalize their business landscape.</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">42+</span>
+                        <span class="stat-label">Financial Institutions</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-years-experience="number">21+</span>
+                        <span class="stat-label">Years of Experience</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">454%</span>
+                        <span class="stat-label">Proven Growth</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">8</span>
+                        <span class="stat-label">Countries</span>
+                    </div>
+                </div>
                 <div class="hero-buttons">
                     <button class="btn-primary" onclick="scrollToSection('contact')">Get Started</button>
                     <button class="btn-secondary" onclick="scrollToSection('features')">Learn More</button>
@@ -504,15 +522,55 @@
 <section id="clients" class="section hero hero--small hero-gradient-3">
     <div class="hero-inner">
         <h1>Powering Financial Growth Across Latin America</h1>
-        <p>Trusted by 42+ financial institutions in 8 countries</p>
+        <p>Trusted by 42+ financial institutions in 8 countries with proven 454% average growth results</p>
         <div class="clients-illustration" style="display:flex;justify-content:center;margin: var(--spacing-lg) 0;">
             <img src="../assets/team_work.png" alt="Team collaborating - FIT-BANK clients" style="max-width: 100%; height: auto; width: min(820px, 100%); border-radius: var(--border-radius-small); box-shadow: 0 10px 30px rgba(0,0,0,0.2);" loading="lazy">
         </div>
-        
-        <!-- Hero Clients Section Container with Scroll -->
-        <div class="hero-clients-section">
-        <!-- Ecuador Region -->
-        <div class="regional-section" style="margin-bottom: var(--spacing-2xl);">
+
+        <!-- Enhanced Statistics -->
+        <div class="hero-stats" style="margin-top: var(--spacing-xl); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-lg); text-align: center;">
+            <div class="stat">
+                <span style="font-size: 2.5rem; font-weight: 700; color: var(--brand-2); display: block;">42+</span>
+                <span style="color: var(--muted); font-size: 1.05rem;">Financial Institutions</span>
+            </div>
+            <div class="stat">
+                <span style="font-size: 2.5rem; font-weight: 700; color: var(--brand-2); display: block;">454%</span>
+                <span style="color: var(--muted); font-size: 1.05rem;">Average Asset Growth</span>
+            </div>
+            <div class="stat">
+                <span style="font-size: 2.5rem; font-weight: 700; color: var(--brand-2); display: block;">8</span>
+                <span style="color: var(--muted); font-size: 1.05rem;">Countries Served</span>
+            </div>
+            <div class="stat">
+                <span style="font-size: 2.5rem; font-weight: 700; color: var(--brand-2); display: block;" data-years-experience="number">21+</span>
+                <span style="color: var(--muted); font-size: 1.05rem;">Years of Innovation</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container">
+    <!-- Hero Clients Section Container with Scroll -->
+    <div class="hero-clients-section">
+    <!-- Featured Success Story -->
+    <div class="success-stories" style="margin-bottom: var(--spacing-2xl);">
+        <div class="success-story-card" style="background: var(--card); border: 1px solid #1c244d; border-radius: var(--border-radius); padding: var(--spacing-xl); margin-bottom: var(--spacing-lg); position: relative;">
+            <div style="position: absolute; top: var(--spacing-lg); left: var(--spacing-lg); font-size: 4rem; color: var(--brand); opacity: 0.3; font-family: serif;">"</div>
+            <blockquote style="font-size: 1.2rem; font-style: italic; color: var(--ink); margin-bottom: var(--spacing-lg); padding-left: var(--spacing-2xl);">
+                "FIT-BANK completely transformed our operations. The flexibility and reliability of the system has allowed us to serve our partners more efficiently than ever. Our assets grew 600% in just 3 years after implementation."
+            </blockquote>
+            <div style="display: flex; align-items: center; gap: var(--spacing-md); padding-left: var(--spacing-2xl);">
+                <div style="width: 60px; height: 60px; background: var(--brand); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 1.2rem;">JEP</div>
+                <div>
+                    <div style="font-weight: 600; color: var(--ink);">Executive at JEP</div>
+                    <div style="color: var(--muted); font-size: 1.05rem;">One of Ecuador's leading financial institutions</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ecuador Region -->
+    <div class="regional-section" style="margin-bottom: var(--spacing-2xl);">
             <div style="display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-lg); padding: var(--spacing-md) 0; border-bottom: 2px solid var(--brand-2);">
                 <span style="font-size: 2rem;">🇪🇨</span>
                 <h2 style="font-size: 1.8rem; font-weight: 700; color: var(--brand-2); margin: 0; flex: 1;">Ecuador</h2>
@@ -755,8 +813,6 @@
                 </a>
             </div>
         </div>
-        </div><!-- End hero-clients-section -->
-    </div>
 
 <!-- Additional Testimonials -->
     <div class="testimonials-section" style="margin-bottom: var(--spacing-2xl);">
@@ -770,7 +826,7 @@
                 <div style="font-weight: 600; color: var(--brand-2);">IT Director</div>
                 <div style="color: var(--muted); font-size: 1.05rem;">Cooperativa Atuntaqui</div>
             </div>
-            
+
             <div style="background: var(--card); border: 1px solid #1c244d; border-radius: var(--border-radius-small); padding: var(--spacing-lg);">
                 <div style="color: var(--brand); font-size: 1.5rem; margin-bottom: var(--spacing-sm);">★★★★★</div>
                 <blockquote style="font-style: italic; color: var(--ink); margin-bottom: var(--spacing-md);">
@@ -781,6 +837,7 @@
             </div>
         </div>
     </div>
+    </div><!-- End hero-clients-section -->
 </section>
 
     <!-- AI Assistant Section -->
