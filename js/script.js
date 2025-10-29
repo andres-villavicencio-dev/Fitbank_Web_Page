@@ -1314,5 +1314,47 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /* ============================================================================
+   12. FAQ SECTION FUNCTIONALITY
+   ============================================================================ */
+
+/**
+ * Toggle FAQ answer visibility
+ * @param {HTMLElement} questionElement - The clicked FAQ question element
+ */
+function toggleFAQ(questionElement) {
+    const faqItem = questionElement.parentElement;
+    const answer = faqItem.querySelector('.faq-answer');
+    const icon = questionElement.querySelector('.faq-icon');
+
+    // Check if this FAQ is currently open
+    const isOpen = faqItem.classList.contains('active');
+
+    // Close all other FAQs in the same category
+    const category = faqItem.closest('.faq-category');
+    if (category) {
+        category.querySelectorAll('.faq-item.active').forEach(item => {
+            if (item !== faqItem) {
+                item.classList.remove('active');
+                const otherAnswer = item.querySelector('.faq-answer');
+                const otherIcon = item.querySelector('.faq-icon');
+                if (otherAnswer) otherAnswer.style.maxHeight = null;
+                if (otherIcon) otherIcon.textContent = '+';
+            }
+        });
+    }
+
+    // Toggle current FAQ
+    if (isOpen) {
+        faqItem.classList.remove('active');
+        answer.style.maxHeight = null;
+        icon.textContent = '+';
+    } else {
+        faqItem.classList.add('active');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        icon.textContent = '−';
+    }
+}
+
+/* ============================================================================
    END OF ORGANIZED FIT-BANK JAVASCRIPT
    ============================================================================ */
