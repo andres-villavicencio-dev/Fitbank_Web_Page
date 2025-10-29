@@ -48,31 +48,31 @@ FIT-BANK is a professional marketing website for Soft Warehouse S.A.'s core bank
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    Static Website Layer                      │
-│  ┌─────────────┐  ┌──────────────┐  ┌──────────────┐       │
-│  │   HTML5     │  │    CSS3      │  │  Vanilla JS  │       │
-│  │  Templates  │  │  (Modular)   │  │   (ES6+)     │       │
-│  └──────┬──────┘  └──────┬───────┘  └──────┬───────┘       │
-│         │                 │                  │                │
-│         └─────────────────┴──────────────────┘                │
-│                           │                                   │
-├───────────────────────────┼───────────────────────────────────┤
-│                    Apache Web Server                          │
-│  ┌─────────────────────────────────────────────────────┐     │
-│  │  .htaccess Configuration                            │     │
-│  │  • URL Rewriting & Redirects                        │     │
-│  │  • Security Headers (CSP, CORS, XSS)                │     │
-│  │  • Gzip Compression                                 │     │
-│  │  • Browser Caching (1 year for static assets)      │     │
-│  │  • HTTPS Enforcement                                │     │
-│  └─────────────────────────────────────────────────────┘     │
-├───────────────────────────────────────────────────────────────┤
-│                   Client-Side Services                        │
+│                    Static Website Layer                     │
+│  ┌─────────────┐  ┌──────────────┐  ┌──────────────┐        │
+│  │   HTML5     │  │    CSS3      │  │  Vanilla JS  │        │
+│  │  Templates  │  │  (Modular)   │  │   (ES6+)     │        │
+│  └──────┬──────┘  └──────┬───────┘  └──────┬───────┘        │
+│         │                │                 │                │
+│         └────────────────┴─────────────────┘                │
+│                           │                                 │
+├───────────────────────────┼─────────────────────────────────┤
+│                    Apache Web Server                        │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │  .htaccess Configuration                            │    │
+│  │  • URL Rewriting & Redirects                        │    │
+│  │  • Security Headers (CSP, CORS, XSS)                │    │
+│  │  • Gzip Compression                                 │    │
+│  │  • Browser Caching (1 year for static assets)       │    │
+│  │  • HTTPS Enforcement                                │    │
+│  └─────────────────────────────────────────────────────┘    │
+├─────────────────────────────────────────────────────────────┤
+│                   Client-Side Services                      │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐       │
 │  │  Auto i18n   │  │  AI Chat     │  │  Analytics   │       │
 │  │  Detection   │  │  Assistant   │  │  (GA4)       │       │
 │  └──────────────┘  └──────────────┘  └──────────────┘       │
-└───────────────────────────────────────────────────────────────┘
+└─────────────────────────────────────────────────────────────┘
 ```
 
 **Data Flow:**
@@ -113,51 +113,6 @@ FIT-BANK is a professional marketing website for Soft Warehouse S.A.'s core bank
 | **Git** | Version control |
 | **Browser DevTools** | Debugging, performance profiling |
 | **Lighthouse** | Performance & SEO audits |
-
----
-
-## Project Structure
-
-```
-fitbank-website/
-├── index.html              # Language selection landing page (auto-redirect)
-├── 404.html                # Custom error page
-├── favicon.ico             # Site favicon
-├── robots.txt              # Search engine directives
-├── sitemap.xml             # XML sitemap with hreflang annotations
-├── .htaccess              # Apache server configuration
-├── .gitignore             # Git ignore rules
-│
-├── en/                     # English version
-│   └── index.html          # Main EN page
-│
-├── es/                     # Spanish version
-│   └── index.html          # Main ES page
-│
-├── css/                    # Stylesheets
-│   └── style.css           # Main CSS (organized by sections)
-│
-├── js/                     # JavaScript
-│   └── script.js           # Main JS (organized by functionality)
-│
-└── assets/                 # Static assets
-    ├── fitbank_logo.png
-    ├── hero-person-working.png
-    ├── layersArch.png
-    ├── logo_softwarehouse_*.svg
-    ├── designs/            # Design mockups
-    │   └── FIT-BANK Website Design Overview.png
-    ├── icons/              # SVG icons
-    │   ├── analytics.svg
-    │   ├── cloud.svg
-    │   ├── lock.svg
-    │   └── ... (12 icons)
-    └── logos/              # Client logos (80+ PNG/SVG files)
-        ├── atuntaqui.png
-        ├── mushuc_runa.png
-        ├── jep.png
-        └── ... (70+ client logos)
-```
 
 ---
 
