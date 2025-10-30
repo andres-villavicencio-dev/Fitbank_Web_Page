@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas Frecuentes - FAQ | FIT-BANK</title>
+    <meta name="description" content="Obtén respuestas a preguntas comunes sobre el sistema bancario central FIT-BANK. Aprende sobre requisitos técnicos, implementación, precios, seguridad y cumplimiento normativo.">
+    <meta name="keywords" content="FIT-BANK FAQ, preguntas software bancario, implementación banca central, precios sistema bancario, cumplimiento SEPS, seguridad bancaria">
+    <link rel="canonical" href="https://www.fit-bank.com/es/faq.html">
+    <link rel="alternate" hreflang="es" href="https://www.fit-bank.com/es/faq.html">
+    <link rel="alternate" hreflang="en" href="https://www.fit-bank.com/en/faq.html">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="index.html">
+                        <img src="../assets/logo_softwarehouse_white.790a3de5c51e85d2d8cfbaa28e456d0f.svg" alt="FIT-BANK Logo" class="logo-img">
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item">
+                        <a href="index.html#features" class="nav-link">Características</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#clients" class="nav-link">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="faq.html" class="nav-link active">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#contact" class="nav-link">Contacto</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-cta" onclick="window.location.href='index.html#contact'">Solicitar Demo</button>
+                    </li>
+                    <li class="nav-item language-switcher">
+                        <a href="../en/faq.html" class="nav-link">🇺🇸 EN</a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- FAQ Hero Section -->
+    <section class="faq-hero">
+        <div class="container">
+            <h1>Preguntas Frecuentes</h1>
+            <p class="section-subtitle">Obtén respuestas a preguntas comunes sobre FIT-BANK</p>
+        </div>
+    </section>
+
+    <!-- Comprehensive FAQ Section -->
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <div class="faq-categories">
+                <!-- Technical Questions -->
+                <div class="faq-category">
+                    <h3>💻 Preguntas Técnicas</h3>
+                    <div class="faq-items">
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>¿Qué bases de datos soporta FIT-BANK?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>FIT-BANK es agnóstico a la base de datos gracias a su capa de persistencia Hibernate. Soportamos todos los principales sistemas de bases de datos incluyendo <strong>Oracle</strong>, <strong>PostgreSQL</strong>, <strong>EnterpriseDB</strong>, <strong>SQL Server</strong>, <strong>IBM DB/2</strong> y <strong>Sybase</strong>. Esta flexibilidad le permite elegir la base de datos que mejor se adapte a su infraestructura y presupuesto.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>¿FIT-BANK puede integrarse con nuestros sistemas existentes?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>¡Sí! FIT-BANK proporciona capacidades integrales de integración a través de:</p>
+                                <ul>
+                                    <li><strong>APIs RESTful</strong> para integración de sistemas modernos</li>
+                                    <li><strong>Servicios web SOAP/XML</strong> para sistemas legacy</li>
+                                    <li><strong>Integración a nivel de base de datos</strong> cuando sea necesario</li>
+                                    <li>Conectores pre-construidos para sistemas ERP, pasarelas de pago, burós de crédito, SWIFT y sistemas de compensación locales (SPI/SCI)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>¿Cuál es la garantía de tiempo de actividad del sistema?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>FIT-BANK está diseñado para <strong>operación continua 24/7/365</strong> con un <strong>SLA de 99.9% de tiempo de actividad</strong>. Proporcionamos redundancia integrada, mecanismos automáticos de conmutación por error y características de disponibilidad continua para asegurar que sus operaciones bancarias nunca se detengan.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>¿Cuáles son los requisitos mínimos del servidor?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p><strong>Requisitos Mínimos:</strong></p>
+                                <ul>
+                                    <li>16GB RAM, CPU de 4 núcleos, 500GB de almacenamiento SSD</li>
+                                    <li>Sistema operativo Linux o Windows Server</li>
+                                    <li>Entorno de ejecución Java 1.8 o superior</li>
+                                </ul>
+                                <p><strong>Recomendado:</strong> Los requisitos escalan según el tamaño de la institución (miembros, volumen de transacciones). Soportamos implementaciones en la nube en AWS, Azure, Google Cloud e infraestructura on-premise.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>¿Cómo funciona la migración de datos?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Nuestro proceso estructurado de migración de 2-4 semanas incluye:</p>
+                                <ol>
+                                    <li><strong>Extracción de datos</strong> de su sistema legacy</li>
+                                    <li><strong>Limpieza de datos</strong> y validación</li>
+                                    <li><strong>Transformación de datos</strong> y mapeo a la estructura de FIT-BANK</li>
+                                    <li><strong>Importaciones de prueba</strong> y testing</li>
+                                    <li><strong>Migración final</strong> a producción</li>
+                                    <li><strong>Verificación y conciliación</strong></li>
+                                </ol>
+                                <p>Nuestro equipo tiene experiencia migrando desde todos los principales sistemas bancarios centrales en América Latina.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Questions -->
+                <div class="faq-category">
+                    <h3>📊 Preguntas de Negocio</h3>
+                    <div class="faq-items">
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>¿Cuál es el tiempo típico de retorno de inversión (ROI)?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>La mayoría de las instituciones ven un <strong>ROI positivo dentro de 18-24 meses</strong> a través de:</p>
+                                <ul>
+                                    <li><strong>Ganancias en eficiencia operativa</strong> - Reducción del 60-70% en procesamiento manual</li>
+                                    <li><strong>Ahorro de costos</strong> - Costos reducidos de mantenimiento y soporte</li>
+                                    <li><strong>Crecimiento de ingresos</strong> - Capacidad de lanzar nuevos productos rápidamente</li>
+                                    <li><strong>Satisfacción del cliente</strong> - Mejor servicio que conduce a retención de miembros</li>
+                                </ul>
+                                <p>Nuestros clientes han logrado un promedio de <strong>454% de crecimiento de activos</strong> después de la implementación.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>¿Proporcionan capacitación al personal?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>¡Sí! Proporcionamos programas integrales de capacitación:</p>
+                                <ul>
+                                    <li><strong>Capacitación presencial</strong> en su institución</li>
+                                    <li><strong>Sesiones de capacitación virtual</strong> vía videoconferencia</li>
+                                    <li><strong>Programas de capacitación de capacitadores</strong> para construir experiencia interna</li>
+                                    <li><strong>Materiales de aprendizaje en línea</strong> y tutoriales en video</li>
+                                    <li><strong>Documentación de usuario</strong> y guías de referencia rápida</li>
+                                    <li><strong>Programa de certificación de administrador</strong> para personal de TI</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>¿Podemos personalizar módulos y flujos de trabajo?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>¡Absolutamente! FIT-BANK es altamente personalizable:</p>
+                                <ul>
+                                    <li><strong>Configuración de productos</strong> - Cree productos financieros personalizados sin programación</li>
+                                    <li><strong>Personalización de flujos de trabajo</strong> - Ajuste procesos de aprobación y reglas de negocio</li>
+                                    <li><strong>Personalización de reportes</strong> - Diseñe reportes personalizados usando Jasper Studio</li>
+                                    <li><strong>Personalización de pantallas</strong> - Ajuste interfaces de usuario para que coincidan con sus procesos</li>
+                                    <li><strong>Desarrollo personalizado</strong> - Disponible para requisitos únicos</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>¿Qué soporte continuo proporcionan?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Ofrecemos tres niveles de soporte:</p>
+                                <ul>
+                                    <li><strong>Soporte Básico:</strong> Horario laboral, sistema de email/tickets, respuesta en 48 horas</li>
+                                    <li><strong>Soporte Premium:</strong> Horario extendido, teléfono/email/chat, respuesta en 24 horas para no críticos, 4 horas para críticos</li>
+                                    <li><strong>Soporte Enterprise:</strong> 24/7/365, gerente de cuenta dedicado, respuesta en 1 hora para problemas críticos</li>
+                                </ul>
+                                <p>Todos los niveles incluyen actualizaciones de software, corrección de errores y actualizaciones de cumplimiento normativo.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>¿Con qué frecuencia se publican actualizaciones?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Nuestro calendario de lanzamientos:</p>
+                                <ul>
+                                    <li><strong>Lanzamientos mayores:</strong> Trimestralmente (nuevas características y mejoras)</li>
+                                    <li><strong>Lanzamientos menores:</strong> Mensualmente (mejoras y optimizaciones)</li>
+                                    <li><strong>Parches de seguridad:</strong> Según sea necesario (implementación inmediata para problemas críticos)</li>
+                                    <li><strong>Actualizaciones normativas:</strong> Inmediatamente tras cambios en regulaciones</li>
+                                </ul>
+                                <p>Las actualizaciones se prueban exhaustivamente y pueden desplegarse con mínima interrupción.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compliance Questions -->
+                <div class="faq-category">
+                    <h3>⚖️ Preguntas de Cumplimiento y Seguridad</h3>
+                    <div class="faq-items">
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>¿Cómo manejan los cambios normativos?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Nuestro equipo dedicado de cumplimiento monitorea cambios normativos en los 8 países que atendemos. Cuando las regulaciones cambian:</p>
+                                <ol>
+                                    <li>Nuestro equipo analiza el impacto normativo</li>
+                                    <li>Se desarrollan y prueban las actualizaciones</li>
+                                    <li>Se notifica a los clientes con anticipación</li>
+                                    <li>Se despliegan las actualizaciones con documentación</li>
+                                    <li>Se proporciona soporte para la transición</li>
+                                </ol>
+                                <p><strong>Las actualizaciones de cumplimiento normativo están incluidas en su paquete de soporte</strong> sin costo adicional.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>¿El sistema es auditable?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>¡Sí, completamente! FIT-BANK proporciona pistas de auditoría integrales:</p>
+                                <ul>
+                                    <li><strong>Registro de transacciones:</strong> Cada transacción registrada con detalles completos</li>
+                                    <li><strong>Seguimiento de actividad de usuario:</strong> ID de usuario, marca de tiempo, dirección IP, acciones realizadas</li>
+                                    <li><strong>Historial de cambios de datos:</strong> Valores antes/después para todas las modificaciones</li>
+                                    <li><strong>Reportes de auditoría:</strong> Reportes pre-construidos para auditores internos y externos</li>
+                                    <li><strong>Registros a prueba de manipulación:</strong> Las pistas de auditoría no pueden ser modificadas o eliminadas</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>¿Qué protocolos de seguridad están implementados?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>FIT-BANK implementa múltiples capas de seguridad:</p>
+                                <ul>
+                                    <li><strong>Encriptación:</strong> AES-256 para datos en reposo, TLS 1.3 para datos en tránsito</li>
+                                    <li><strong>Autenticación:</strong> Autenticación multifactor, soporte biométrico, integración con Active Directory</li>
+                                    <li><strong>Autorización:</strong> Control de acceso basado en roles con permisos granulares</li>
+                                    <li><strong>Seguridad de red:</strong> Configuración de firewall, whitelisting de IP, soporte VPN</li>
+                                    <li><strong>Pruebas:</strong> Pruebas de penetración anuales por terceros</li>
+                                    <li><strong>Monitoreo:</strong> Detección de fraude en tiempo real y alertas de actividad sospechosa</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>¿FIT-BANK cumple con GDPR?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Sí, FIT-BANK incluye características para soportar el cumplimiento de GDPR:</p>
+                                <ul>
+                                    <li><strong>Controles de privacidad de datos</strong> y gestión de consentimiento</li>
+                                    <li><strong>Derecho al olvido</strong> funcionalidad de borrado</li>
+                                    <li><strong>Portabilidad de datos</strong> para exportación de datos del cliente</li>
+                                    <li><strong>Arquitectura de privacidad por diseño</strong></li>
+                                    <li><strong>Notificación de violación de datos</strong> capacidades</li>
+                                </ul>
+                                <p>También soportamos el cumplimiento con regulaciones locales de protección de datos en América Latina.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pricing & Implementation -->
+                <div class="faq-category">
+                    <h3>💰 Preguntas de Precios e Implementación</h3>
+                    <div class="faq-items">
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>¿Cuánto cuesta FIT-BANK?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>El precio varía según:</p>
+                                <ul>
+                                    <li><strong>Tamaño de la institución</strong> (número de miembros/clientes)</li>
+                                    <li><strong>Módulos seleccionados</strong> (solo paga por lo que necesita)</li>
+                                    <li><strong>Modelo de implementación</strong> (nube vs. on-premise)</li>
+                                    <li><strong>Nivel de soporte</strong> (Básico, Premium o Enterprise)</li>
+                                </ul>
+                                <p>Ofrecemos modelos de licenciamiento flexibles incluyendo precios por usuario, por institución y basados en transacciones. <strong>Contáctenos para una cotización personalizada</strong> adaptada a las necesidades de su institución.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>¿Cuál es el tiempo típico de implementación?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p><strong>Tiempo típico: 3-6 meses</strong> desde el contrato hasta el go-live, desglosado como:</p>
+                                <ul>
+                                    <li>Descubrimiento y Requisitos: 2-3 semanas</li>
+                                    <li>Configuración del Sistema: 4-6 semanas</li>
+                                    <li>Migración de Datos: 2-4 semanas</li>
+                                    <li>Pruebas y Capacitación: 3-4 semanas</li>
+                                    <li>Go-Live y Soporte: 1-2 semanas</li>
+                                </ul>
+                                <p>El cronograma puede acelerarse para necesidades urgentes o extenderse para migraciones complejas.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>¿Podemos comenzar con pocos módulos y agregar más después?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>¡Absolutamente! La arquitectura modular de FIT-BANK le permite:</p>
+                                <ul>
+                                    <li>Comenzar con módulos esenciales para sus operaciones</li>
+                                    <li>Agregar módulos adicionales a medida que crecen sus necesidades</li>
+                                    <li>Escalar gradualmente sin interrumpir las operaciones existentes</li>
+                                    <li>Pagar solo por los módulos que realmente utiliza</li>
+                                </ul>
+                                <p>Muchos clientes comienzan con banca central y gradualmente agregan CRM, banca móvil y otros módulos.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>¿Ofrecen implementación en la nube?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>¡Sí! FIT-BANK está listo para la nube y soporta:</p>
+                                <ul>
+                                    <li><strong>Nube pública:</strong> AWS, Microsoft Azure, Google Cloud Platform</li>
+                                    <li><strong>Nube privada:</strong> Infraestructura de nube dedicada</li>
+                                    <li><strong>Nube híbrida:</strong> Mezcla de nube y on-premise</li>
+                                    <li><strong>On-premise:</strong> Implementación tradicional en servidor</li>
+                                </ul>
+                                <p>La implementación en la nube ofrece implementación más rápida, escalamiento automático y costos de infraestructura reducidos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-cta">
+                <h3>¿Todavía Tienes Preguntas?</h3>
+                <p>Nuestro equipo está aquí para ayudar. Contáctenos para respuestas personalizadas a sus preguntas específicas.</p>
+                <a href="index.html#contact" class="btn-primary">Contáctenos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="../assets/logo_softwarehouse_large.b9e74024f957169272ab58d7596e8e65.svg" alt="FIT-BANK Logo" class="footer-logo">
+                    <p data-years-experience="full"><strong>Soft Warehouse S.A.</strong> - Más de 21 años transformando instituciones financieras en América Latina con tecnología bancaria revolucionaria.</p>
+                    <div class="footer-stats">
+                        <span>🏢 42+ Instituciones Atendidas</span>
+                        <span>🌎 8 Países</span>
+                        <span>📈 454% Crecimiento Comprobado</span>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Soluciones</h4>
+                    <ul>
+                        <li><a href="index.html#architecture">Arquitectura Revolucionaria</a></li>
+                        <li><a href="index.html#modules">Módulos Integrales</a></li>
+                        <li><a href="index.html#features">Características Avanzadas</a></li>
+                        <li><a href="index.html#clients">Casos de Éxito</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Productos</h4>
+                    <ul>
+                        <li><a href="index.html#modules">Banca Central para Cooperativas</a></li>
+                        <li><a href="index.html#modules">Banca Central para Bancos Comerciales</a></li>
+                        <li><a href="index.html#modules">ERP Administrativo Financiero</a></li>
+                        <li><a href="index.html#modules">Aplicaciones Móviles</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="index.html#about" data-years-experience="full">Nosotros (21+ Años)</a></li>
+                        <li><a href="index.html#clients">Nuestros Clientes</a></li>
+                        <li><a href="faq.html">Preguntas Frecuentes</a></li>
+                        <li><a href="index.html#contact">Contacto</a></li>
+                        <li><a href="../en/faq.html">English</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Información de Contacto</h4>
+                    <p>📧 info@softwarehouse.com.ec</p>
+                    <p>📱 +593 98 453 8500 / +593 99 974 4957</p>
+                    <p>🏢 Nela Martínez s/n intersección Camilo Ponce Enríquez acceso Autopista General Rumiñahui, Puente 3<br>
+                    Conocoto – Quito - Ecuador</p>
+                    <p>🕒 Lun-Vie: 09:00 AM - 06:00 PM</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p data-years-experience="full">&copy; 2024 Soft Warehouse S.A. Todos los derechos reservados. FIT-BANK es una marca registrada. | Más de 21 años revolucionando la banca latinoamericana.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
